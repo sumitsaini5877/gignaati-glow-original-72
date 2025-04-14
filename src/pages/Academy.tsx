@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,7 +21,8 @@ import {
   Star,
   Trophy,
   Users,
-  Video
+  Video,
+  Download as DownloadIcon
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -548,7 +548,7 @@ const CertificateCard = ({ title, date, icon }: CertificateProps) => {
         <p className="text-xs text-gray-500">Issued on {date}</p>
       </div>
       <Button variant="outline" size="sm">
-        <Download className="h-4 w-4 mr-1" />
+        <DownloadIcon className="h-4 w-4 mr-1" />
         PDF
       </Button>
     </div>
