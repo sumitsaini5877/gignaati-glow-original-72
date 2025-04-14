@@ -1,14 +1,24 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import GetStarted from "@/components/GetStarted";
+import FeaturedGigs from "@/components/FeaturedGigs";
+import CategoryGrid from "@/components/CategoryGrid";
+import HowItWorks from "@/components/HowItWorks";
+import TrustIndicators from "@/components/TrustIndicators";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <GetStarted />
+      <FeaturedGigs />
+      <CategoryGrid />
+      <HowItWorks />
+      <TrustIndicators />
+      <FinalCTA />
+      <Footer />
     </div>
   );
 };
