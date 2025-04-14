@@ -14,6 +14,9 @@ import FreelancerDashboard from "./pages/FreelancerDashboard";
 import Academy from "./pages/Academy";
 import AdminConsole from "./pages/AdminConsole";
 import Auth from "./pages/Auth";
+import Support from "./pages/Support";
+import Messaging from "./pages/Messaging";
+import Wallet from "./pages/Wallet";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,9 @@ const App = () => (
           <Route path="/academy" element={<Academy />} />
           <Route path="/admin" element={<AdminConsole />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/messaging" element={<Messaging />} />
+          <Route path="/wallet" element={<Wallet />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
