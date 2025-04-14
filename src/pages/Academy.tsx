@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// Import our new components
+// Import our components
 import SearchBar from "@/components/academy/SearchBar";
 import CoursesGrid from "@/components/academy/CoursesGrid";
 import AchievementsSection from "@/components/academy/AchievementsSection";
@@ -114,27 +114,29 @@ const Academy = () => {
           
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
-              <TabsTrigger value="courses">Courses</TabsTrigger>
-              <TabsTrigger value="achievements">Achievements</TabsTrigger>
-              <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
-            </TabsList>
-          </Tabs>
+          <div className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
+                <TabsTrigger value="courses">Courses</TabsTrigger>
+                <TabsTrigger value="achievements">Achievements</TabsTrigger>
+                <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="courses" className="mt-0">
+                <CoursesGrid courses={filteredCourses} />
+              </TabsContent>
+              
+              <TabsContent value="achievements" className="mt-0">
+                <AchievementsSection />
+                <CertificatesSection />
+              </TabsContent>
+              
+              <TabsContent value="leaderboard" className="mt-0">
+                <LeaderboardSection />
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
-        
-        <TabsContent value="courses" className="mt-0">
-          <CoursesGrid courses={filteredCourses} />
-        </TabsContent>
-        
-        <TabsContent value="achievements" className="mt-0">
-          <AchievementsSection />
-          <CertificatesSection />
-        </TabsContent>
-        
-        <TabsContent value="leaderboard" className="mt-0">
-          <LeaderboardSection />
-        </TabsContent>
       </div>
       
       <div className="container mx-auto px-4 py-8">
