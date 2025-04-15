@@ -1,8 +1,15 @@
 
 import { ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleExploreCTA = () => {
+    navigate("/browse-gigs");
+  };
+
   return (
     <div className="bg-hero-pattern bg-cover bg-center bg-no-repeat min-h-[60vh] flex items-center relative">
       <div className="absolute inset-0 bg-black/60"></div>
@@ -15,7 +22,10 @@ const Hero = () => {
             Connect with top AI innovators and discover ready-to-deploy AI solutions
           </p>
           <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <Button className="bg-gignaati-coral hover:bg-red-500 text-white px-8 py-6 rounded-full text-lg">
+            <Button 
+              onClick={handleExploreCTA}
+              className="bg-gignaati-coral hover:bg-red-500 text-white px-8 py-6 rounded-full text-lg"
+            >
               Explore AI Agents
               <ArrowRight className="ml-2" size={18} />
             </Button>
