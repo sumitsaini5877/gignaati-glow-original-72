@@ -9,7 +9,7 @@ import {
   Code,
   PenTool,
   Search,
-  Robot,
+  Bot,
   Zap,
   FileText,
   Database,
@@ -28,8 +28,8 @@ import {
 
 // Map of tag names to their corresponding icons
 const tagIcons: Record<string, React.ComponentType<any>> = {
-  "AI Assistant": Robot,
-  "GPT": Robot,
+  "AI Assistant": Bot,
+  "GPT": Bot,
   "Automation": Zap,
   "Content": FileText,
   "Research": Search,

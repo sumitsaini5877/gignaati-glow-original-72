@@ -1,10 +1,9 @@
-
 import { Badge } from "@/components/ui/badge";
 import { 
   Code, 
   PenTool, 
   Search, 
-  Robot, 
+  Bot, 
   Zap, 
   FileText, 
   Database, 
@@ -16,8 +15,8 @@ import {
 
 // Map of tag names to their corresponding icons
 const tagIcons: Record<string, React.ComponentType<any>> = {
-  "AI Assistant": Robot,
-  "GPT": Robot,
+  "AI Assistant": Bot,
+  "GPT": Bot,
   "Automation": Zap,
   "Content": FileText,
   "Research": Search,
@@ -28,7 +27,7 @@ const tagIcons: Record<string, React.ComponentType<any>> = {
   "Integration": Layers,
   "Business": Briefcase,
   "Chat": MessageSquare,
-  // Default icon for tags not in this map will be Robot
+  // Default icon for tags not in this map will be Bot
 };
 
 // Get the appropriate icon for a given tag
@@ -46,7 +45,7 @@ const getTagIcon = (tag: string) => {
   }
   
   // Default icon
-  return Robot;
+  return Bot;
 };
 
 interface TagCloudProps {
