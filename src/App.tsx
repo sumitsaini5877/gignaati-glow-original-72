@@ -17,10 +17,8 @@ import Support from "./pages/Support";
 import Messaging from "./pages/Messaging";
 import Wallet from "./pages/Wallet";
 import AIGigs from "./pages/AIGigs";
-import AIProjects from "./pages/AIProjects";
 import HowItWorks from "./pages/HowItWorks";
 import AIAcademy from "./pages/AIAcademy";
-import Blog from "./pages/Blog";
 
 const queryClient = new QueryClient();
 
@@ -34,10 +32,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/browse-gigs" element={<BrowseGigs />} />
           <Route path="/ai-gigs" element={<AIGigs />} />
-          <Route path="/ai-projects" element={<AIProjects />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/ai-academy" element={<AIAcademy />} />
-          <Route path="/blog" element={<Blog />} />
           <Route path="/gig/:id" element={<GigDetail />} />
           <Route path="/post-gig" element={<PostGig />} />
           <Route path="/client-dashboard" element={<ClientDashboard />} />

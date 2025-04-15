@@ -93,10 +93,8 @@ const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
   const links = [
     { name: 'Home', path: '/' },
     { name: 'AI Gigs', path: '/ai-gigs' },
-    { name: 'AI Projects', path: '/ai-projects' },
     { name: 'How It Works', path: '/how-it-works' },
     { name: 'AI Academy', path: '/ai-academy' },
-    { name: 'Blog', path: '/blog' },
   ];
 
   return (
