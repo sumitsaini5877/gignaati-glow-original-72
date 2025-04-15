@@ -18,7 +18,7 @@ const FreelancerInfo = ({ freelancer }: FreelancerInfoProps) => {
   const navigate = useNavigate();
 
   return (
-    <Card>
+    <Card className="mb-6">
       <CardHeader>
         <CardTitle>About the freelancer</CardTitle>
       </CardHeader>
