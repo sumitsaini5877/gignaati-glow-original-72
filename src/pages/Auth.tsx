@@ -32,6 +32,13 @@ const Auth = () => {
       setUserId(data.email); // In a real app, you'd store the actual user ID
       localStorage.setItem("isAuthenticated", "true");
       
+      // Set default user name if not already set
+      if (!localStorage.getItem("userName")) {
+        const username = data.email.split("@")[0];
+        localStorage.setItem("userName", username);
+        localStorage.setItem("userEmail", data.email);
+      }
+      
       // For demo purposes, we'll skip MFA when a return URL is specified
       if (returnUrl && returnUrl !== "/") {
         toast({

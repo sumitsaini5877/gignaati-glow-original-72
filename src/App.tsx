@@ -22,6 +22,7 @@ import BecomeASeller from "./pages/BecomeASeller";
 import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Checkout";
 import CustomAgentRequest from "./pages/CustomAgentRequest";
+import UserProfile from "./pages/UserProfile";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/become-a-seller" element={<BecomeASeller />} />
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/custom-agent-request/:id" element={<CustomAgentRequest />} />
+          <Route path="/user-profile" element={<UserProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

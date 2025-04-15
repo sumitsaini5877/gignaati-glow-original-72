@@ -1,11 +1,49 @@
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+
+import { useState, useEffect } from 'react';
+import { Menu, X, User, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userImage, setUserImage] = useState('');
   const navigate = useNavigate();
+
+  // Check authentication status on mount and when localStorage changes
+  useEffect(() => {
+    const checkAuth = () => {
+      const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+      setIsAuthenticated(authStatus);
+      
+      if (authStatus) {
+        // Get user data from localStorage if authenticated
+        const storedUserName = localStorage.getItem('userName') || 'User';
+        const storedUserImage = localStorage.getItem('userImage') || '';
+        setUserName(storedUserName);
+        setUserImage(storedUserImage);
+      }
+    };
+
+    // Initial check
+    checkAuth();
+
+    // Listen for storage events (in case another tab changes auth status)
+    window.addEventListener('storage', checkAuth);
+    
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -13,6 +51,24 @@ const Navbar = () => {
 
   const handleBecomeSeller = () => {
     navigate('/become-a-seller');
+  };
+
+  const handleBuyAndTry = () => {
+    // If not authenticated, redirect to auth page and set return URL
+    if (!isAuthenticated) {
+      localStorage.setItem('authRedirectUrl', '/');
+      navigate('/auth');
+    }
+  };
+
+  const handleLogout = () => {
+    // Clear authentication status and user data
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userImage');
+    setIsAuthenticated(false);
+    setUserName('');
+    setUserImage('');
   };
 
   return (
@@ -32,8 +88,47 @@ const Navbar = () => {
           <NavLinks />
         </div>
 
-        {/* Become a Seller Button */}
-        <div className="hidden md:flex items-center">
+        {/* Authentication and Seller Buttons */}
+        <div className="hidden md:flex items-center space-x-4">
+          {/* Buy and Try / User Profile Button */}
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="flex items-center gap-2 border-gray-300">
+                  {userImage ? (
+                    <Avatar className="h-6 w-6">
+                      <AvatarImage src={userImage} alt={userName} />
+                      <AvatarFallback>{userName.charAt(0).toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                  ) : (
+                    <User size={16} />
+                  )}
+                  <span>{userName}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 bg-white">
+                <DropdownMenuItem onClick={() => navigate('/user-profile')}>
+                  <User size={16} className="mr-2" />
+                  See Profile
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut size={16} className="mr-2" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button 
+              variant="outline" 
+              className="border-gray-300"
+              onClick={handleBuyAndTry}
+            >
+              Buy and Try
+            </Button>
+          )}
+          
+          {/* Become a Seller Button */}
           <Button 
             variant="default" 
             className="bg-gignaati-coral hover:bg-red-500 text-white rounded-md"
@@ -55,6 +150,46 @@ const Navbar = () => {
           <div className="flex flex-col space-y-4">
             <NavLinks mobile />
             <div className="flex flex-col space-y-2 pt-4 border-t">
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center space-x-2 p-2 border rounded-md">
+                    {userImage ? (
+                      <Avatar className="h-6 w-6">
+                        <AvatarImage src={userImage} alt={userName} />
+                        <AvatarFallback>{userName.charAt(0).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                    ) : (
+                      <User size={16} />
+                    )}
+                    <span>{userName}</span>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start"
+                    onClick={() => navigate('/user-profile')}
+                  >
+                    <User size={16} className="mr-2" />
+                    See Profile
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start text-red-500"
+                    onClick={handleLogout}
+                  >
+                    <LogOut size={16} className="mr-2" />
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={handleBuyAndTry}
+                >
+                  Buy and Try
+                </Button>
+              )}
+              
               <Button 
                 variant="default" 
                 className="bg-gignaati-coral hover:bg-red-500 text-white w-full"
