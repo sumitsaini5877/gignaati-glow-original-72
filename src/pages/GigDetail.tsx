@@ -100,16 +100,12 @@ const GigDetail = () => {
             />
           </div>
           
-          {/* Right Sidebar - Stacked components */}
+          {/* Right Sidebar - Stacked components with sticky positioning */}
           <div className="lg:col-span-1">
             <div className="flex flex-col space-y-6">
-              {/* Packages with sticky positioning */}
-              <div className="sticky top-24 z-10">
+              {/* Both packages and freelancer info will be in a sticky container */}
+              <div className="sticky top-24">
                 <PackageSelector packages={gig.packages} defaultPackage="training" />
-              </div>
-              
-              {/* Freelancer Info positioned below Packages */}
-              <div className="mt-6">
                 <FreelancerInfo freelancer={gig.freelancer} />
               </div>
             </div>
