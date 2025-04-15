@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Linkedin, Github, Instagram } from "lucide-react";
 
@@ -17,7 +18,6 @@ const Footer = () => {
       title: "For Clients",
       links: [
         { name: "Find AI Agents", url: "/browse-gigs" },
-        { name: "Post a Project", url: "/post-project" },
         { name: "Client Success Stories", url: "/success-stories" },
         { name: "Resources", url: "/resources" }
       ]
@@ -27,13 +27,13 @@ const Footer = () => {
       links: [
         { name: "Post a Gig", url: "/post-gig" },
         { name: "Community", url: "/community" },
-        { name: "Freelancer FAQ", url: "/freelancer-faq" }
+        { name: "Freelancer FAQ", url: "/support" }
       ]
     },
     {
       title: "Support",
       links: [
-        { name: "Help Center", url: "/help" },
+        { name: "Help Center", url: "/support" },
         { name: "Contact Us", url: "/contact" },
         { name: "Trust & Safety", url: "/trust" },
         { name: "Accessibility", url: "/accessibility" }
