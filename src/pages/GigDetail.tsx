@@ -29,6 +29,8 @@ const GigDetail = () => {
       "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&auto=format&fit=crop&q=80"
     ],
     demoVideo: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    // Add tags to the gig data
+    tags: ["GPT", "Content Creation", "AI Assistant", "Marketing", "SEO", "Automation"],
     freelancer: {
       name: "Alex Johnson",
       rating: 4.9,
@@ -120,6 +122,7 @@ const GigDetail = () => {
                 <FreelancerInfo 
                   freelancer={gig.freelancer}
                   gigId={gig.id}
+                  tags={gig.tags} // Pass the tags to the FreelancerInfo component
                 />
               </div>
             </div>

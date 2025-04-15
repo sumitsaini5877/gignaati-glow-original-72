@@ -4,6 +4,77 @@ import { Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import {
+  Code,
+  PenTool,
+  Search,
+  Robot,
+  Zap,
+  FileText,
+  Database,
+  PieChart,
+  Layers,
+  Briefcase,
+  MessageSquare
+} from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+// Map of tag names to their corresponding icons
+const tagIcons: Record<string, React.ComponentType<any>> = {
+  "AI Assistant": Robot,
+  "GPT": Robot,
+  "Automation": Zap,
+  "Content": FileText,
+  "Research": Search,
+  "Prompt Writing": PenTool,
+  "Data Analysis": PieChart,
+  "Code": Code,
+  "Database": Database,
+  "Integration": Layers,
+  "Business": Briefcase,
+  "Chat": MessageSquare,
+};
+
+// Get the appropriate icon for a given tag
+const getTagIcon = (tag: string) => {
+  // Try to find an exact match
+  if (tagIcons[tag]) {
+    return tagIcons[tag];
+  }
+  
+  // Try to find a partial match
+  for (const [key, icon] of Object.entries(tagIcons)) {
+    if (tag.toLowerCase().includes(key.toLowerCase())) {
+      return icon;
+    }
+  }
+  
+  // Default icon
+  return Robot;
+};
+
+// Common tags that users can quickly select from
+const commonTags = [
+  "AI Assistant",
+  "GPT",
+  "Automation",
+  "Content",
+  "Research",
+  "Prompt Writing",
+  "Data Analysis",
+  "Code",
+  "Database",
+  "Integration",
+  "Business",
+  "Chat",
+];
 
 interface TagsInputProps {
   tags: string[];
@@ -28,8 +99,14 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
     }
   };
 
+  const handleSelectCommonTag = (value: string) => {
+    if (!tags.includes(value)) {
+      onTagInput(value);
+    }
+  };
+
   return (
-    <div>
+    <div className="space-y-4">
       <Label htmlFor="tags">Tags</Label>
       <div className="flex items-center gap-2 mb-2">
         <Tag className="h-4 w-4 text-gray-400" />
@@ -37,17 +114,21 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
       </div>
       
       <div className="flex flex-wrap gap-2 mb-2">
-        {tags.map((tag, index) => (
-          <div key={index} className="bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-            <span className="text-sm">{tag}</span>
-            <button 
-              onClick={() => onRemoveTag(tag)} 
-              className="text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
-          </div>
-        ))}
+        {tags.map((tag, index) => {
+          const TagIcon = getTagIcon(tag);
+          return (
+            <Badge key={index} variant="outline" className="flex items-center gap-1 bg-white border py-2 px-3">
+              <TagIcon className="h-3.5 w-3.5 text-gray-600" />
+              <span>{tag}</span>
+              <button 
+                onClick={() => onRemoveTag(tag)} 
+                className="ml-1 text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </Badge>
+          );
+        })}
       </div>
       
       <div className="flex gap-2">
@@ -65,6 +146,44 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
         >
           Add
         </Button>
+      </div>
+      
+      <div className="mt-4">
+        <Label className="mb-2 block">Quick Select Common Tags</Label>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {commonTags.map((tag) => {
+            const TagIcon = tagIcons[tag] || Robot;
+            const isSelected = tags.includes(tag);
+            return (
+              <Button
+                key={tag}
+                type="button"
+                variant={isSelected ? "secondary" : "outline"}
+                className={`justify-start text-sm h-auto py-2 ${isSelected ? 'bg-gray-100' : ''}`}
+                onClick={() => handleSelectCommonTag(tag)}
+                disabled={isSelected}
+              >
+                <TagIcon className="h-3.5 w-3.5 mr-2" />
+                {tag}
+              </Button>
+            );
+          })}
+        </div>
+      </div>
+      
+      <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+        <h3 className="text-sm font-medium mb-3">Tag Cloud Preview</h3>
+        <div className="flex flex-wrap gap-2">
+          {tags.map((tag, index) => {
+            const TagIcon = getTagIcon(tag);
+            return (
+              <Badge key={index} variant="outline" className="flex items-center gap-1 bg-white border py-1 px-2">
+                <TagIcon className="h-3.5 w-3.5 text-gray-600" />
+                <span>{tag}</span>
+              </Badge>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
