@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -26,7 +25,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// Map of tag names to their corresponding icons
 const tagIcons: Record<string, React.ComponentType<any>> = {
   "AI Assistant": Bot,
   "GPT": Bot,
@@ -42,25 +40,20 @@ const tagIcons: Record<string, React.ComponentType<any>> = {
   "Chat": MessageSquare,
 };
 
-// Get the appropriate icon for a given tag
 const getTagIcon = (tag: string) => {
-  // Try to find an exact match
   if (tagIcons[tag]) {
     return tagIcons[tag];
   }
   
-  // Try to find a partial match
   for (const [key, icon] of Object.entries(tagIcons)) {
     if (tag.toLowerCase().includes(key.toLowerCase())) {
       return icon;
     }
   }
   
-  // Default icon
-  return Robot;
+  return Bot;
 };
 
-// Common tags that users can quickly select from
 const commonTags = [
   "AI Assistant",
   "GPT",
@@ -152,7 +145,7 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
         <Label className="mb-2 block">Quick Select Common Tags</Label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {commonTags.map((tag) => {
-            const TagIcon = tagIcons[tag] || Robot;
+            const TagIcon = tagIcons[tag] || Bot;
             const isSelected = tags.includes(tag);
             return (
               <Button

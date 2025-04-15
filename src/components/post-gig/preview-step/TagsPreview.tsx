@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import {
   Code,
@@ -14,7 +13,6 @@ import {
   MessageSquare
 } from "lucide-react";
 
-// Map of tag names to their corresponding icons
 const tagIcons: Record<string, React.ComponentType<any>> = {
   "AI Assistant": Bot,
   "GPT": Bot,
@@ -30,7 +28,6 @@ const tagIcons: Record<string, React.ComponentType<any>> = {
   "Chat": MessageSquare,
 };
 
-// Get the appropriate icon for a given tag
 const getTagIcon = (tag: string) => {
   // Try to find an exact match
   if (tagIcons[tag]) {
@@ -44,8 +41,8 @@ const getTagIcon = (tag: string) => {
     }
   }
   
-  // Default icon
-  return Robot;
+  // Default icon is now Bot, not Robot
+  return Bot;
 };
 
 interface TagsPreviewProps {
