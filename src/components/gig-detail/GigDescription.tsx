@@ -13,6 +13,7 @@ import {
 interface GigDescriptionProps {
   description: string;
   prerequisites?: string;
+  agentDetail?: string;
   manualVsAi?: string;
   tokenomics?: string;
   benefits?: string;
@@ -21,6 +22,7 @@ interface GigDescriptionProps {
 const GigDescription = ({ 
   description, 
   prerequisites = "Familiarity with prompting, basic understanding of GPT models, and willingness to learn.",
+  agentDetail = "The AI agent is trained on your specific content and can produce high-quality tailored content for your needs.",
   manualVsAi = "Manual content creation takes 3-5 hours per piece, while our AI solution delivers comparable quality in minutes. Traditional methods involve hiring writers, extensive editing, and long turnaround times.",
   tokenomics = "Pay-per-use pricing structure with volume discounts. No hidden fees or subscriptions required.",
   benefits = "Time savings, consistent quality, SEO optimization, and 24/7 availability. Scale your content production without scaling your team."
