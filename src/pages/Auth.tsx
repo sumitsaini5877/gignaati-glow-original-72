@@ -8,13 +8,42 @@ import SignupForm from "@/components/auth/SignupForm";
 import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
 import AuthHeader from "@/components/auth/AuthHeader";
 import AuthFooter from "@/components/auth/AuthFooter";
+import MFASetup from "@/components/auth/MFASetup";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [showMFASetup, setShowMFASetup] = useState(false);
+  const [userId, setUserId] = useState("");
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (data: { email: string, success: boolean }) => {
+    if (data.success) {
+      // In a real app, check if user already has MFA enabled
+      // For demo purposes, we'll always show the MFA setup
+      setUserId(data.email);
+      setShowMFASetup(true);
+    }
+  };
+
+  const handleMFAComplete = () => {
     navigate("/");
   };
+
+  const handleMFACancel = () => {
+    navigate("/");
+  };
+
+  // Show MFA setup screen if login was successful
+  if (showMFASetup) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <MFASetup 
+          userId={userId}
+          onComplete={handleMFAComplete}
+          onCancel={handleMFACancel}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
@@ -34,7 +63,7 @@ const Auth = () => {
           
           <TabsContent value="login">
             <CardContent>
-              <LoginForm />
+              <LoginForm onSuccess={handleLoginSuccess} />
             </CardContent>
           </TabsContent>
           

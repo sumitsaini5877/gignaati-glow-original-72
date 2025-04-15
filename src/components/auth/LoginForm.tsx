@@ -9,7 +9,11 @@ import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onSuccess?: (data: { email: string, success: boolean }) => void;
+}
+
+const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,18 +38,24 @@ const LoginForm = () => {
         description: "You have successfully logged in.",
       });
       
-      // Navigation happens in parent component
+      // Call onSuccess callback if provided
+      if (onSuccess) {
+        onSuccess({ email, success: true });
+      }
     } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Login failed",
         description: error.message || "An error occurred during login",
       });
+      
+      // Call onSuccess with failure
+      if (onSuccess) {
+        onSuccess({ email, success: false });
+      }
     } finally {
       setLoading(false);
     }
-
-    return { email, success: true };
   };
 
   return (
