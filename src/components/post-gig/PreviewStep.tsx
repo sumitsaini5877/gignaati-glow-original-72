@@ -13,7 +13,6 @@ interface FormData {
   prerequisites: string;
   manualVsAi: string;
   tokenomics: string;
-  benefits: string;
   demoLink: string;
   demoImages?: string[];
   demoVideo?: string;

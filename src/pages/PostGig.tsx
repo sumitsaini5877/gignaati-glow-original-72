@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -28,7 +27,6 @@ const PostGig = () => {
     prerequisites: "",
     manualVsAi: "",
     tokenomics: "",
-    benefits: "",
     demoLink: "",
     demoImages: [] as string[],
     demoVideo: "",
@@ -145,7 +143,6 @@ const PostGig = () => {
                     prerequisites={formData.prerequisites}
                     manualVsAi={formData.manualVsAi}
                     tokenomics={formData.tokenomics}
-                    benefits={formData.benefits}
                     onInputChange={handleInputChange} 
                   />
                 )}

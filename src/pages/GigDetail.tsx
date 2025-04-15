@@ -97,7 +97,6 @@ const GigDetail = () => {
               agentDetail={gig.agentDetail}
               tokenomics={gig.tokenomics}
               manualVsAi={gig.manualVsAi}
-              benefits={gig.benefits}
             />
             
             {/* Reviews Section */}
