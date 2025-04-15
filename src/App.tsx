@@ -18,7 +18,7 @@ import Messaging from "./pages/Messaging";
 import Wallet from "./pages/Wallet";
 import AIGigs from "./pages/AIGigs";
 import HowItWorks from "./pages/HowItWorks";
-import Waitlist from "./pages/Waitlist";
+import BecomeASeller from "./pages/BecomeASeller";
 import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Checkout";
 import CustomAgentRequest from "./pages/CustomAgentRequest";
@@ -46,7 +46,7 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/wallet" element={<Wallet />} />
-          <Route path="/waitlist" element={<Waitlist />} />
+          <Route path="/become-a-seller" element={<BecomeASeller />} />
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/custom-agent-request/:id" element={<CustomAgentRequest />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, Mail } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 
@@ -11,9 +11,8 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleJoinWaitlist = () => {
-    // TODO: Implement waitlist signup logic
-    navigate('/waitlist');
+  const handleBecomeSeller = () => {
+    navigate('/become-a-seller');
   };
 
   return (
@@ -33,15 +32,14 @@ const Navbar = () => {
           <NavLinks />
         </div>
 
-        {/* Join Waitlist Button */}
+        {/* Become a Seller Button */}
         <div className="hidden md:flex items-center">
           <Button 
             variant="default" 
-            className="bg-gignaati-coral hover:bg-red-500 text-white rounded-md flex items-center gap-2"
-            onClick={handleJoinWaitlist}
+            className="bg-gignaati-coral hover:bg-red-500 text-white rounded-md"
+            onClick={handleBecomeSeller}
           >
-            <Mail size={16} />
-            Join Waitlist
+            Become a Seller/Creator
           </Button>
         </div>
 
@@ -59,11 +57,10 @@ const Navbar = () => {
             <div className="flex flex-col space-y-2 pt-4 border-t">
               <Button 
                 variant="default" 
-                className="bg-gignaati-coral hover:bg-red-500 text-white w-full flex items-center gap-2"
-                onClick={handleJoinWaitlist}
+                className="bg-gignaati-coral hover:bg-red-500 text-white w-full"
+                onClick={handleBecomeSeller}
               >
-                <Mail size={16} />
-                Join Waitlist
+                Become a Seller/Creator
               </Button>
             </div>
           </div>
@@ -76,7 +73,7 @@ const Navbar = () => {
 const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
   const links = [
     { name: 'Home', path: '/' },
-    { name: 'AI Gigs', path: '/browse-gigs' }, // Changed from '/ai-gigs' to '/browse-gigs'
+    { name: 'AI Gigs', path: '/browse-gigs' },
     { name: 'How It Works', path: '/how-it-works' },
   ];
 
