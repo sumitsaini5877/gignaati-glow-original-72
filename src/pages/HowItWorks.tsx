@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,15 +6,16 @@ import FinalCTA from "@/components/FinalCTA";
 
 const HowItWorks = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
-      <div className="pt-24 pb-16 px-6 bg-gradient-to-r from-[#14213D] to-blue-900">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+      <div className="pt-24 pb-16 px-6 bg-hero-pattern bg-cover bg-center relative">
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in">
             How Gignaati Works
           </h1>
-          <p className="text-gray-200 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg md:text-xl mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
             Your simple guide to finding, testing and deploying AI agents
           </p>
         </div>
@@ -30,25 +30,25 @@ const HowItWorks = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="h-8 w-8 text-blue-600" />
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <div className="w-16 h-16 bg-gignaati-orange-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="h-8 w-8 text-gignaati-coral" />
               </div>
               <h3 className="font-bold text-xl mb-2">1. Browse & Test</h3>
               <p className="text-gray-600">Explore our marketplace of AI agents and test their capabilities before you buy</p>
             </div>
             
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CreditCard className="h-8 w-8 text-blue-600" />
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <div className="w-16 h-16 bg-gignaati-orange-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <CreditCard className="h-8 w-8 text-gignaati-coral" />
               </div>
               <h3 className="font-bold text-xl mb-2">2. Select & Purchase</h3>
               <p className="text-gray-600">Choose the right agent for your needs and complete your purchase securely</p>
             </div>
             
-            <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="h-8 w-8 text-blue-600" />
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <div className="w-16 h-16 bg-gignaati-orange-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="h-8 w-8 text-gignaati-coral" />
               </div>
               <h3 className="font-bold text-xl mb-2">3. Deploy & Use</h3>
               <p className="text-gray-600">Easily deploy your new AI agent to your workflows and start saving time</p>
@@ -56,7 +56,7 @@ const HowItWorks = () => {
           </div>
           
           <div className="text-center mt-8">
-            <Button className="bg-[#FCA311] hover:bg-amber-500 text-white px-8 py-2">
+            <Button className="bg-gignaati-coral hover:bg-red-500 text-white px-8 py-2">
               Browse AI Agents
             </Button>
           </div>
