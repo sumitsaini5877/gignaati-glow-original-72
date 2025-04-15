@@ -21,6 +21,14 @@ const GigDetail = () => {
     tokenomics: "Simple, transparent pricing with no hidden fees. Pay only for what you use, with bulk discounts available for larger content needs.",
     manualVsAi: "Traditional content creation requires hiring writers, extensive editing, and days of turnaround time. Our AI solution delivers comparable quality in minutes at a fraction of the cost.",
     benefits: "Increase your content production by 5x while maintaining quality. Free up your creative team for strategic work while the AI handles the routine content creation.",
+    demoImages: [
+      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&auto=format&fit=crop&q=80"
+    ],
+    demoVideo: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     freelancer: {
       name: "Alex Johnson",
       rating: 4.9,
@@ -79,8 +87,8 @@ const GigDetail = () => {
           <div className="lg:col-span-2">
             <h1 className="text-3xl font-bold mb-4">{gig.title}</h1>
             
-            {/* Demo Preview Section */}
-            <DemoPreview />
+            {/* Demo Preview Section with Images and Video */}
+            <DemoPreview images={gig.demoImages} video={gig.demoVideo} />
             
             {/* Description */}
             <GigDescription 
@@ -100,7 +108,7 @@ const GigDetail = () => {
             />
           </div>
           
-          {/* Right Sidebar - Stacked components with sticky positioning */}
+          {/* Right Sidebar */}
           <div className="lg:col-span-1">
             <div className="flex flex-col space-y-6">
               {/* Both packages and freelancer info will be in a sticky container */}

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,6 +30,8 @@ const PostGig = () => {
     tokenomics: "",
     benefits: "",
     demoLink: "",
+    demoImages: [] as string[],
+    demoVideo: "",
     tags: [] as string[],
     packages: {
       setup: { title: "Setup", description: "", price: "", deliveryTime: "" },
@@ -68,6 +71,36 @@ const PostGig = () => {
     setFormData({
       ...formData,
       tags: formData.tags.filter(tag => tag !== tagToRemove)
+    });
+  };
+
+  const handleImageUpload = (imageUrl: string) => {
+    if (formData.demoImages.length < 5) {
+      setFormData({
+        ...formData,
+        demoImages: [...formData.demoImages, imageUrl]
+      });
+    }
+  };
+
+  const handleVideoUpload = (videoUrl: string) => {
+    setFormData({
+      ...formData,
+      demoVideo: videoUrl
+    });
+  };
+
+  const handleRemoveImage = (imageUrl: string) => {
+    setFormData({
+      ...formData,
+      demoImages: formData.demoImages.filter(img => img !== imageUrl)
+    });
+  };
+
+  const handleRemoveVideo = () => {
+    setFormData({
+      ...formData,
+      demoVideo: ""
     });
   };
   
@@ -121,9 +154,15 @@ const PostGig = () => {
                   <DemoTagsStep 
                     demoLink={formData.demoLink}
                     tags={formData.tags}
+                    images={formData.demoImages}
+                    video={formData.demoVideo}
                     onInputChange={handleInputChange}
                     onTagInput={handleTagInput}
                     onRemoveTag={handleRemoveTag}
+                    onImageUpload={handleImageUpload}
+                    onVideoUpload={handleVideoUpload}
+                    onRemoveImage={handleRemoveImage}
+                    onRemoveVideo={handleRemoveVideo}
                   />
                 )}
                 

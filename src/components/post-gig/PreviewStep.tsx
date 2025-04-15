@@ -15,6 +15,8 @@ interface FormData {
   tokenomics: string;
   benefits: string;
   demoLink: string;
+  demoImages?: string[];
+  demoVideo?: string;
   tags: string[];
   packages: {
     setup: { title: string; description: string; price: string; deliveryTime: string; };
@@ -35,7 +37,11 @@ const PreviewStep = ({ formData }: PreviewStepProps) => {
       <div className="space-y-6">
         <TitlePreview title={formData.title} />
         <DescriptionPreview formData={formData} />
-        <DemoLinkPreview demoLink={formData.demoLink} />
+        <DemoLinkPreview 
+          demoLink={formData.demoLink} 
+          images={formData.demoImages} 
+          video={formData.demoVideo}
+        />
         <TagsPreview tags={formData.tags} />
         <PackagesPreview packages={formData.packages} />
       </div>
