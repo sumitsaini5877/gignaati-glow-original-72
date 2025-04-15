@@ -11,7 +11,6 @@ import GigDetail from "./pages/GigDetail";
 import PostGig from "./pages/PostGig";
 import ClientDashboard from "./pages/ClientDashboard";
 import FreelancerDashboard from "./pages/FreelancerDashboard";
-import Academy from "./pages/Academy";
 import AdminConsole from "./pages/AdminConsole";
 import Auth from "./pages/Auth";
 import Support from "./pages/Support";
@@ -33,7 +32,6 @@ const App = () => (
           <Route path="/post-gig" element={<PostGig />} />
           <Route path="/client-dashboard" element={<ClientDashboard />} />
           <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
-          <Route path="/academy" element={<Academy />} />
           <Route path="/admin" element={<AdminConsole />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/support" element={<Support />} />
