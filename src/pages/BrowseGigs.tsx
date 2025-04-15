@@ -16,8 +16,13 @@ const BrowseGigs = () => {
   const [filters, setFilters] = useState<FilterState>({
     categories: [],
     functions: [],
-    platforms: [],
+    types: [],
+    llmModels: [],
+    hostingProviders: [],
     industries: [],
+    integrations: [],
+    businessFunctions: [],
+    professions: [],
     ratings: [],
     priceRange: [0, 1000]
   });
@@ -38,8 +43,13 @@ const BrowseGigs = () => {
     setFilters({
       categories: [],
       functions: [],
-      platforms: [],
+      types: [],
+      llmModels: [],
+      hostingProviders: [],
       industries: [],
+      integrations: [],
+      businessFunctions: [],
+      professions: [],
       ratings: [],
       priceRange: [0, 1000]
     });
