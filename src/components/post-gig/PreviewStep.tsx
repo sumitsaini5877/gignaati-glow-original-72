@@ -7,25 +7,10 @@ import {
   PackagesPreview
 } from "./preview-step";
 
-interface FormData {
-  title: string;
-  description: string;
-  prerequisites: string;
-  manualVsAi: string;
-  tokenomics: string;
-  demoLink: string;
-  demoImages?: string[];
-  demoVideo?: string;
-  tags: string[];
-  packages: {
-    setup: { title: string; description: string; price: string; deliveryTime: string; };
-    training: { title: string; description: string; price: string; deliveryTime: string; };
-    customization: { title: string; description: string; price: string; deliveryTime: string; };
-  };
-}
+import { GigFormData } from "@/hooks/usePostGigForm";
 
 interface PreviewStepProps {
-  formData: FormData;
+  formData: GigFormData;
 }
 
 const PreviewStep = ({ formData }: PreviewStepProps) => {
