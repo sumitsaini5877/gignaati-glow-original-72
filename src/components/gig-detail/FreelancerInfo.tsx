@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Star, UserCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface FreelancerInfoProps {
   freelancer: {
@@ -14,6 +15,8 @@ interface FreelancerInfoProps {
 }
 
 const FreelancerInfo = ({ freelancer }: FreelancerInfoProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card>
       <CardHeader>
@@ -41,7 +44,7 @@ const FreelancerInfo = ({ freelancer }: FreelancerInfoProps) => {
         </div>
         
         <div className="space-y-2">
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" onClick={() => navigate("/messaging")}>
             <MessageSquare className="mr-2 h-4 w-4" />
             Chat with Freelancer
           </Button>

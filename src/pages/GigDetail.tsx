@@ -100,13 +100,15 @@ const GigDetail = () => {
             />
           </div>
           
-          {/* Right Sidebar */}
+          {/* Right Sidebar - sticky position */}
           <div className="lg:col-span-1">
-            {/* Pricing Tiers */}
-            <PackageSelector packages={gig.packages} defaultPackage="training" />
-            
-            {/* Freelancer Info */}
-            <FreelancerInfo freelancer={gig.freelancer} />
+            <div className="sticky top-24 space-y-6">
+              {/* Pricing Tiers */}
+              <PackageSelector packages={gig.packages} defaultPackage="training" />
+              
+              {/* Freelancer Info */}
+              <FreelancerInfo freelancer={gig.freelancer} />
+            </div>
           </div>
         </div>
       </div>
