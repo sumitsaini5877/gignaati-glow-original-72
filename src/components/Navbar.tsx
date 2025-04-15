@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Menu, X, Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -77,7 +76,7 @@ const Navbar = () => {
 const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
   const links = [
     { name: 'Home', path: '/' },
-    { name: 'AI Gigs', path: '/ai-gigs' },
+    { name: 'AI Gigs', path: '/browse-gigs' }, // Changed from '/ai-gigs' to '/browse-gigs'
     { name: 'How It Works', path: '/how-it-works' },
   ];
 
