@@ -7,9 +7,17 @@ import FreelancerInfo from "@/components/gig-detail/FreelancerInfo";
 import DemoPreview from "@/components/gig-detail/DemoPreview";
 import GigDescription from "@/components/gig-detail/GigDescription";
 import ReviewsSection from "@/components/gig-detail/ReviewsSection";
+import { useEffect, useState } from "react";
 
 const GigDetail = () => {
   const { id } = useParams();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  // Check if user is authenticated on component mount
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated") === "true";
+    setIsAuthenticated(authStatus);
+  }, []);
 
   // Mock data - replace with actual API call later
   const gig = {
@@ -29,7 +37,6 @@ const GigDetail = () => {
       "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&auto=format&fit=crop&q=80"
     ],
     demoVideo: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    // Add tags to the gig data
     tags: ["GPT", "Content Creation", "AI Assistant", "Marketing", "SEO", "Automation"],
     freelancer: {
       name: "Alex Johnson",
@@ -67,14 +74,23 @@ const GigDetail = () => {
         avatar: "/placeholder.svg",
         rating: 5,
         date: "2023-11-15",
-        text: "Exceptional work! The GPT model Alex created for me perfectly captured my brand voice and has saved me countless hours of content creation."
+        text: "Exceptional work! The GPT model Alex created for me perfectly captured my brand voice and has saved me countless hours of content creation.",
+        replies: []
       },
       {
         user: "Michael T.",
         avatar: "/placeholder.svg",
         rating: 4,
         date: "2023-10-22",
-        text: "Great experience overall. The AI assistant works really well for most of my content needs, though it needed some fine-tuning for technical topics."
+        text: "Great experience overall. The AI assistant works really well for most of my content needs, though it needed some fine-tuning for technical topics.",
+        replies: [
+          {
+            user: "Alex Johnson",
+            avatar: "/placeholder.svg",
+            text: "Thanks for the feedback, Michael! I've made some adjustments to improve handling of technical topics.",
+            date: "2023-10-23"
+          }
+        ]
       }
     ]
   };
@@ -106,6 +122,9 @@ const GigDetail = () => {
               rating={gig.freelancer.rating} 
               reviewCount={gig.freelancer.reviews} 
               reviews={gig.reviews} 
+              gigId={id || ""}
+              isAuthenticated={isAuthenticated}
+              tags={gig.tags}
             />
           </div>
           
@@ -122,7 +141,7 @@ const GigDetail = () => {
                 <FreelancerInfo 
                   freelancer={gig.freelancer}
                   gigId={gig.id}
-                  tags={gig.tags} // Pass the tags to the FreelancerInfo component
+                  tags={gig.tags}
                 />
               </div>
             </div>
