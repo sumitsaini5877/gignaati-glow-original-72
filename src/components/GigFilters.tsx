@@ -4,9 +4,21 @@ import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-const GigFilters = () => {
-  const [priceRange, setPriceRange] = useState([0, 1000]);
+export type FilterState = {
+  categories: string[];
+  functions: string[];
+  platforms: string[];
+  industries: string[];
+  ratings: string[];
+  priceRange: [number, number];
+}
 
+interface GigFiltersProps {
+  filters: FilterState;
+  onFilterChange: (filters: FilterState) => void;
+}
+
+const GigFilters = ({ filters, onFilterChange }: GigFiltersProps) => {
   const categories = [
     { id: "automation", label: "Automation" },
     { id: "content", label: "Content Creation" },
@@ -47,13 +59,41 @@ const GigFilters = () => {
     { id: "3", label: "3+ Stars" }
   ];
 
-  const FilterSection = ({ title, items }: { title: string, items: { id: string, label: string }[] }) => (
+  const handleCheckboxChange = (section: keyof Omit<FilterState, 'priceRange'>, itemId: string) => {
+    const currentValues = filters[section];
+    let newValues: string[];
+    
+    if (currentValues.includes(itemId)) {
+      newValues = currentValues.filter(id => id !== itemId);
+    } else {
+      newValues = [...currentValues, itemId];
+    }
+    
+    onFilterChange({
+      ...filters,
+      [section]: newValues
+    });
+  };
+
+  const FilterSection = ({ 
+    title, 
+    items, 
+    section 
+  }: { 
+    title: string, 
+    items: { id: string, label: string }[],
+    section: keyof Omit<FilterState, 'priceRange'>
+  }) => (
     <div className="mb-6">
       <h3 className="font-semibold mb-3">{title}</h3>
       <div className="space-y-2">
         {items.map(item => (
           <div key={item.id} className="flex items-center space-x-2">
-            <Checkbox id={item.id} />
+            <Checkbox 
+              id={item.id} 
+              checked={filters[section].includes(item.id)}
+              onCheckedChange={() => handleCheckboxChange(section, item.id)}
+            />
             <Label htmlFor={item.id} className="text-sm font-normal cursor-pointer">
               {item.label}
             </Label>
@@ -65,26 +105,28 @@ const GigFilters = () => {
 
   return (
     <div className="space-y-6">
-      <FilterSection title="Category" items={categories} />
-      <FilterSection title="Function" items={functions} />
-      <FilterSection title="Platform" items={platforms} />
-      <FilterSection title="Industry" items={industries} />
-      <FilterSection title="Rating" items={ratings} />
+      <FilterSection title="Category" items={categories} section="categories" />
+      <FilterSection title="Function" items={functions} section="functions" />
+      <FilterSection title="Platform" items={platforms} section="platforms" />
+      <FilterSection title="Industry" items={industries} section="industries" />
+      <FilterSection title="Rating" items={ratings} section="ratings" />
       
       <div className="mb-6">
         <h3 className="font-semibold mb-3">Price Range</h3>
         <div className="px-2">
           <Slider 
-            defaultValue={[0, 1000]} 
+            value={filters.priceRange}
             max={1000} 
             step={10}
-            value={priceRange}
-            onValueChange={(value) => setPriceRange(value as [number, number])}
+            onValueChange={(value) => onFilterChange({
+              ...filters,
+              priceRange: value as [number, number]
+            })}
             className="mb-6"
           />
           <div className="flex justify-between text-sm">
-            <span>${priceRange[0]}</span>
-            <span>${priceRange[1]}</span>
+            <span>${filters.priceRange[0]}</span>
+            <span>${filters.priceRange[1]}</span>
           </div>
         </div>
       </div>
