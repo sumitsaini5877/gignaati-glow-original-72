@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Linkedin, Github, Instagram } from "lucide-react";
 
@@ -27,7 +26,6 @@ const Footer = () => {
       title: "For Freelancers",
       links: [
         { name: "Post a Gig", url: "/post-gig" },
-        { name: "AI Academy", url: "/academy" },
         { name: "Community", url: "/community" },
         { name: "Freelancer FAQ", url: "/freelancer-faq" }
       ]

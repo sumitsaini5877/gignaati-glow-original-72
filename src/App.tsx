@@ -18,7 +18,6 @@ import Messaging from "./pages/Messaging";
 import Wallet from "./pages/Wallet";
 import AIGigs from "./pages/AIGigs";
 import HowItWorks from "./pages/HowItWorks";
-import AIAcademy from "./pages/AIAcademy";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +32,6 @@ const App = () => (
           <Route path="/browse-gigs" element={<BrowseGigs />} />
           <Route path="/ai-gigs" element={<AIGigs />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/ai-academy" element={<AIAcademy />} />
           <Route path="/gig/:id" element={<GigDetail />} />
           <Route path="/post-gig" element={<PostGig />} />
           <Route path="/client-dashboard" element={<ClientDashboard />} />

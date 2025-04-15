@@ -94,7 +94,6 @@ const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
     { name: 'Home', path: '/' },
     { name: 'AI Gigs', path: '/ai-gigs' },
     { name: 'How It Works', path: '/how-it-works' },
-    { name: 'AI Academy', path: '/ai-academy' },
   ];
 
   return (
