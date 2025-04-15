@@ -4,15 +4,30 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, BookOpen, User, Coins, GitCompare, Award } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface BasicInfoStepProps {
   title: string;
   description: string;
+  prerequisites: string;
+  agentDetail: string;
+  tokenomics: string;
+  manualVsAi: string;
+  benefits: string;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const BasicInfoStep = ({ title, description, onInputChange }: BasicInfoStepProps) => {
+const BasicInfoStep = ({ 
+  title, 
+  description, 
+  prerequisites,
+  agentDetail,
+  tokenomics,
+  manualVsAi,
+  benefits,
+  onInputChange 
+}: BasicInfoStepProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold mb-4">Basic Information</h2>
@@ -30,20 +45,115 @@ const BasicInfoStep = ({ title, description, onInputChange }: BasicInfoStepProps
           />
         </div>
         
-        <div>
-          <Label htmlFor="description">Description</Label>
+        <div className="space-y-4">
+          <Label>Description Sections</Label>
           <div className="flex items-center gap-2 mb-2">
             <HelpCircle className="h-4 w-4 text-gray-400" />
-            <span className="text-sm text-gray-500">Describe what your AI agent does, its features, and benefits</span>
+            <span className="text-sm text-gray-500">Fill out the sections below to create a comprehensive gig description</span>
           </div>
-          <Textarea 
-            id="description" 
-            name="description"
-            placeholder="Describe your AI gig in detail..." 
-            className="min-h-[200px] mt-1"
-            value={description}
-            onChange={onInputChange}
-          />
+          
+          <Tabs defaultValue="description" className="w-full">
+            <TabsList className="grid grid-cols-3 mb-4 w-full md:grid-cols-6">
+              <TabsTrigger value="description" className="text-xs md:text-sm">Overview</TabsTrigger>
+              <TabsTrigger value="prerequisites" className="text-xs md:text-sm">Prerequisites</TabsTrigger>
+              <TabsTrigger value="agentDetail" className="text-xs md:text-sm">Agent Detail</TabsTrigger>
+              <TabsTrigger value="tokenomics" className="text-xs md:text-sm">Tokenomics</TabsTrigger>
+              <TabsTrigger value="manualVsAi" className="text-xs md:text-sm">Manual VS AI</TabsTrigger>
+              <TabsTrigger value="benefits" className="text-xs md:text-sm">Benefits</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="description" className="mt-0">
+              <Label htmlFor="description">Overview</Label>
+              <Textarea 
+                id="description" 
+                name="description"
+                placeholder="Describe your AI gig in detail..." 
+                className="min-h-[150px] mt-1"
+                value={description}
+                onChange={onInputChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="prerequisites" className="mt-0">
+              <Label htmlFor="prerequisites">Prerequisites</Label>
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-500">What does the client need to know or have before using your agent?</span>
+              </div>
+              <Textarea 
+                id="prerequisites" 
+                name="prerequisites"
+                placeholder="E.g., Basic understanding of content strategy. No technical skills required..." 
+                className="min-h-[150px] mt-1"
+                value={prerequisites}
+                onChange={onInputChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="agentDetail" className="mt-0">
+              <Label htmlFor="agentDetail">Agent Detail</Label>
+              <div className="flex items-center gap-2 mb-2">
+                <User className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-500">Describe the capabilities and features of your AI agent</span>
+              </div>
+              <Textarea 
+                id="agentDetail" 
+                name="agentDetail"
+                placeholder="E.g., This AI agent is trained on over 10,000 high-quality content pieces..." 
+                className="min-h-[150px] mt-1"
+                value={agentDetail}
+                onChange={onInputChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="tokenomics" className="mt-0">
+              <Label htmlFor="tokenomics">Tokenomics</Label>
+              <div className="flex items-center gap-2 mb-2">
+                <Coins className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-500">Explain your pricing model and token usage</span>
+              </div>
+              <Textarea 
+                id="tokenomics" 
+                name="tokenomics"
+                placeholder="E.g., Simple, transparent pricing with no hidden fees..." 
+                className="min-h-[150px] mt-1"
+                value={tokenomics}
+                onChange={onInputChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="manualVsAi" className="mt-0">
+              <Label htmlFor="manualVsAi">Manual VS AI</Label>
+              <div className="flex items-center gap-2 mb-2">
+                <GitCompare className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-500">Compare traditional methods versus your AI solution</span>
+              </div>
+              <Textarea 
+                id="manualVsAi" 
+                name="manualVsAi"
+                placeholder="E.g., Traditional content creation requires hiring writers..." 
+                className="min-h-[150px] mt-1"
+                value={manualVsAi}
+                onChange={onInputChange}
+              />
+            </TabsContent>
+            
+            <TabsContent value="benefits" className="mt-0">
+              <Label htmlFor="benefits">Benefits</Label>
+              <div className="flex items-center gap-2 mb-2">
+                <Award className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-500">Highlight the key benefits of using your AI agent</span>
+              </div>
+              <Textarea 
+                id="benefits" 
+                name="benefits"
+                placeholder="E.g., Increase your content production by 5x while maintaining quality..." 
+                className="min-h-[150px] mt-1"
+                value={benefits}
+                onChange={onInputChange}
+              />
+            </TabsContent>
+          </Tabs>
         </div>
         
         <div>

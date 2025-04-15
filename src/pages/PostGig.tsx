@@ -25,6 +25,11 @@ const PostGig = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    prerequisites: "",
+    agentDetail: "",
+    tokenomics: "",
+    manualVsAi: "",
+    benefits: "",
     demoLink: "",
     tags: [] as string[],
     packages: {
@@ -112,7 +117,12 @@ const PostGig = () => {
                 {currentStep === 1 && (
                   <BasicInfoStep 
                     title={formData.title} 
-                    description={formData.description} 
+                    description={formData.description}
+                    prerequisites={formData.prerequisites}
+                    agentDetail={formData.agentDetail}
+                    tokenomics={formData.tokenomics}
+                    manualVsAi={formData.manualVsAi}
+                    benefits={formData.benefits}
                     onInputChange={handleInputChange} 
                   />
                 )}

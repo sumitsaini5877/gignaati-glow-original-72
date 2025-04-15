@@ -16,6 +16,11 @@ const GigDetail = () => {
     id,
     title: "Advanced GPT Assistant for Content Creation",
     description: "Get a professionally trained GPT model that produces high-quality content for your blog, social media, or website. Customized for your brand voice and content needs.",
+    prerequisites: "Basic understanding of content strategy. No technical skills required. Just provide examples of your brand's content and voice.",
+    agentDetail: "This AI agent is trained on over 10,000 high-quality content pieces and can adapt to your specific brand voice. It excels at creating blog posts, social media content, and marketing materials.",
+    tokenomics: "Simple, transparent pricing with no hidden fees. Pay only for what you use, with bulk discounts available for larger content needs.",
+    manualVsAi: "Traditional content creation requires hiring writers, extensive editing, and days of turnaround time. Our AI solution delivers comparable quality in minutes at a fraction of the cost.",
+    benefits: "Increase your content production by 5x while maintaining quality. Free up your creative team for strategic work while the AI handles the routine content creation.",
     freelancer: {
       name: "Alex Johnson",
       rating: 4.9,
@@ -78,7 +83,14 @@ const GigDetail = () => {
             <DemoPreview />
             
             {/* Description */}
-            <GigDescription description={gig.description} />
+            <GigDescription 
+              description={gig.description} 
+              prerequisites={gig.prerequisites}
+              agentDetail={gig.agentDetail}
+              tokenomics={gig.tokenomics}
+              manualVsAi={gig.manualVsAi}
+              benefits={gig.benefits}
+            />
             
             {/* Reviews Section */}
             <ReviewsSection 
