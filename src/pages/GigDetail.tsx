@@ -100,7 +100,7 @@ const GigDetail = () => {
             />
           </div>
           
-          {/* Right Sidebar - Fixed positioning for both components */}
+          {/* Right Sidebar - Stacked components */}
           <div className="lg:col-span-1">
             <div className="flex flex-col space-y-6">
               {/* Packages with sticky positioning */}
@@ -108,8 +108,8 @@ const GigDetail = () => {
                 <PackageSelector packages={gig.packages} defaultPackage="training" />
               </div>
               
-              {/* Freelancer Info with fixed positioning */}
-              <div className="fixed w-[calc(25%-2rem)] max-w-xs">
+              {/* Freelancer Info positioned below Packages */}
+              <div className="mt-6">
                 <FreelancerInfo freelancer={gig.freelancer} />
               </div>
             </div>
