@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,9 +25,8 @@ const PostGig = () => {
     title: "",
     description: "",
     prerequisites: "",
-    agentDetail: "",
-    tokenomics: "",
     manualVsAi: "",
+    tokenomics: "",
     benefits: "",
     demoLink: "",
     tags: [] as string[],
@@ -86,15 +84,11 @@ const PostGig = () => {
   };
   
   const saveDraft = () => {
-    // Submit form data to backend as draft
     console.log("Saving as draft:", formData);
-    // Redirect or show success message
   };
 
   const publishGig = () => {
-    // Submit form data to backend
     console.log("Submitting gig:", formData);
-    // Redirect or show success message
   };
 
   return (
@@ -105,29 +99,24 @@ const PostGig = () => {
         <h1 className="text-3xl font-bold mb-2 text-center">Post a New AI Gig</h1>
         <p className="text-gray-600 text-center mb-8">Create a compelling gig to showcase your AI talent</p>
         
-        {/* Progress Bar */}
         <StepProgress steps={steps} currentStep={currentStep} />
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Form */}
           <div className="lg:col-span-3">
             <Card>
               <CardContent className="p-6">
-                {/* Step 1: Basic Info */}
                 {currentStep === 1 && (
                   <BasicInfoStep 
                     title={formData.title} 
                     description={formData.description}
                     prerequisites={formData.prerequisites}
-                    agentDetail={formData.agentDetail}
-                    tokenomics={formData.tokenomics}
                     manualVsAi={formData.manualVsAi}
+                    tokenomics={formData.tokenomics}
                     benefits={formData.benefits}
                     onInputChange={handleInputChange} 
                   />
                 )}
                 
-                {/* Step 2: Demo & Tags */}
                 {currentStep === 2 && (
                   <DemoTagsStep 
                     demoLink={formData.demoLink}
@@ -138,7 +127,6 @@ const PostGig = () => {
                   />
                 )}
                 
-                {/* Step 3: Packages */}
                 {currentStep === 3 && (
                   <PackageBuilderStep 
                     packages={formData.packages}
@@ -146,12 +134,10 @@ const PostGig = () => {
                   />
                 )}
                 
-                {/* Step 4: Preview */}
                 {currentStep === 4 && (
                   <PreviewStep formData={formData} />
                 )}
                 
-                {/* Navigation Buttons */}
                 <NavigationButtons 
                   currentStep={currentStep} 
                   totalSteps={steps.length}
@@ -164,7 +150,6 @@ const PostGig = () => {
             </Card>
           </div>
           
-          {/* Sidebar with Tips */}
           <div className="lg:col-span-1">
             <TipsSidebar currentStep={currentStep} />
           </div>

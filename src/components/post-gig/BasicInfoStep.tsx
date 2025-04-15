@@ -4,16 +4,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { HelpCircle, BookOpen, User, Coins, GitCompare, Award } from "lucide-react";
+import { HelpCircle, BookOpen, GitCompare, Coins, Award } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface BasicInfoStepProps {
   title: string;
   description: string;
   prerequisites: string;
-  agentDetail: string;
-  tokenomics: string;
   manualVsAi: string;
+  tokenomics: string;
   benefits: string;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
@@ -22,9 +21,8 @@ const BasicInfoStep = ({
   title, 
   description, 
   prerequisites,
-  agentDetail,
-  tokenomics,
   manualVsAi,
+  tokenomics,
   benefits,
   onInputChange 
 }: BasicInfoStepProps) => {
@@ -56,9 +54,8 @@ const BasicInfoStep = ({
             <TabsList className="grid grid-cols-3 mb-4 w-full md:grid-cols-6">
               <TabsTrigger value="description" className="text-xs md:text-sm">Overview</TabsTrigger>
               <TabsTrigger value="prerequisites" className="text-xs md:text-sm">Prerequisites</TabsTrigger>
-              <TabsTrigger value="agentDetail" className="text-xs md:text-sm">Agent Detail</TabsTrigger>
-              <TabsTrigger value="tokenomics" className="text-xs md:text-sm">Tokenomics</TabsTrigger>
               <TabsTrigger value="manualVsAi" className="text-xs md:text-sm">Manual VS AI</TabsTrigger>
+              <TabsTrigger value="tokenomics" className="text-xs md:text-sm">Tokenomics</TabsTrigger>
               <TabsTrigger value="benefits" className="text-xs md:text-sm">Benefits</TabsTrigger>
             </TabsList>
             
@@ -90,18 +87,18 @@ const BasicInfoStep = ({
               />
             </TabsContent>
             
-            <TabsContent value="agentDetail" className="mt-0">
-              <Label htmlFor="agentDetail">Agent Detail</Label>
+            <TabsContent value="manualVsAi" className="mt-0">
+              <Label htmlFor="manualVsAi">Manual VS AI</Label>
               <div className="flex items-center gap-2 mb-2">
-                <User className="h-4 w-4 text-gray-400" />
-                <span className="text-sm text-gray-500">Describe the capabilities and features of your AI agent</span>
+                <GitCompare className="h-4 w-4 text-gray-400" />
+                <span className="text-sm text-gray-500">Compare traditional methods versus your AI solution</span>
               </div>
               <Textarea 
-                id="agentDetail" 
-                name="agentDetail"
-                placeholder="E.g., This AI agent is trained on over 10,000 high-quality content pieces..." 
+                id="manualVsAi" 
+                name="manualVsAi"
+                placeholder="E.g., Traditional content creation requires hiring writers..." 
                 className="min-h-[150px] mt-1"
-                value={agentDetail}
+                value={manualVsAi}
                 onChange={onInputChange}
               />
             </TabsContent>
@@ -118,22 +115,6 @@ const BasicInfoStep = ({
                 placeholder="E.g., Simple, transparent pricing with no hidden fees..." 
                 className="min-h-[150px] mt-1"
                 value={tokenomics}
-                onChange={onInputChange}
-              />
-            </TabsContent>
-            
-            <TabsContent value="manualVsAi" className="mt-0">
-              <Label htmlFor="manualVsAi">Manual VS AI</Label>
-              <div className="flex items-center gap-2 mb-2">
-                <GitCompare className="h-4 w-4 text-gray-400" />
-                <span className="text-sm text-gray-500">Compare traditional methods versus your AI solution</span>
-              </div>
-              <Textarea 
-                id="manualVsAi" 
-                name="manualVsAi"
-                placeholder="E.g., Traditional content creation requires hiring writers..." 
-                className="min-h-[150px] mt-1"
-                value={manualVsAi}
                 onChange={onInputChange}
               />
             </TabsContent>

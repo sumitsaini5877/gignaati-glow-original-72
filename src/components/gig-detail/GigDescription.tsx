@@ -13,18 +13,16 @@ import {
 interface GigDescriptionProps {
   description: string;
   prerequisites?: string;
-  agentDetail?: string;
-  tokenomics?: string;
   manualVsAi?: string;
+  tokenomics?: string;
   benefits?: string;
 }
 
 const GigDescription = ({ 
   description, 
   prerequisites = "Familiarity with prompting, basic understanding of GPT models, and willingness to learn.",
-  agentDetail = "This AI agent specializes in content creation with expertise in blog writing, social media posts, and marketing copy. The agent is trained on high-quality writing samples and understands SEO best practices.",
+  manualVsAi = "Manual content creation takes 3-5 hours per piece, while our AI solution delivers comparable quality in minutes. Traditional methods involve hiring writers, extensive editing, and long turnaround times.",
   tokenomics = "Pay-per-use pricing structure with volume discounts. No hidden fees or subscriptions required.",
-  manualVsAi = "Manual content creation takes 3-5 hours per piece, while our AI solution delivers comparable quality in minutes. Save up to 80% of your content creation time.",
   benefits = "Time savings, consistent quality, SEO optimization, and 24/7 availability. Scale your content production without scaling your team."
 }: GigDescriptionProps) => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -45,9 +43,9 @@ const GigDescription = ({
               <BookOpen className="h-4 w-4" />
               <span className="hidden sm:inline">Prerequisites</span>
             </TabsTrigger>
-            <TabsTrigger value="agentDetail" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              <span className="hidden sm:inline">Agent Detail</span>
+            <TabsTrigger value="manualVsAi" className="flex items-center gap-2">
+              <GitCompare className="h-4 w-4" />
+              <span className="hidden sm:inline">Manual VS AI</span>
             </TabsTrigger>
             <TabsTrigger value="tokenomics" className="flex items-center gap-2">
               <Coins className="h-4 w-4" />
@@ -87,28 +85,6 @@ const GigDescription = ({
             <p className="text-gray-700">{prerequisites}</p>
           </TabsContent>
           
-          <TabsContent value="agentDetail" className="space-y-4">
-            <p className="text-gray-700">{agentDetail}</p>
-          </TabsContent>
-          
-          <TabsContent value="tokenomics" className="space-y-4">
-            <p className="text-gray-700">{tokenomics}</p>
-            <div className="mt-4">
-              <div className="flex items-center justify-between border-b py-2">
-                <span>Setup Package</span>
-                <span className="font-medium">$199</span>
-              </div>
-              <div className="flex items-center justify-between border-b py-2">
-                <span>Training Package</span>
-                <span className="font-medium">$349</span>
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <span>Customization Package</span>
-                <span className="font-medium">$599</span>
-              </div>
-            </div>
-          </TabsContent>
-          
           <TabsContent value="manualVsAi" className="space-y-4">
             <p className="text-gray-700">{manualVsAi}</p>
             <div className="grid grid-cols-2 gap-4 mt-4">
@@ -129,6 +105,24 @@ const GigDescription = ({
                   <li>Infinitely scalable</li>
                   <li>Consistent quality</li>
                 </ul>
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="tokenomics" className="space-y-4">
+            <p className="text-gray-700">{tokenomics}</p>
+            <div className="mt-4">
+              <div className="flex items-center justify-between border-b py-2">
+                <span>Setup Package</span>
+                <span className="font-medium">$199</span>
+              </div>
+              <div className="flex items-center justify-between border-b py-2">
+                <span>Training Package</span>
+                <span className="font-medium">$349</span>
+              </div>
+              <div className="flex items-center justify-between py-2">
+                <span>Customization Package</span>
+                <span className="font-medium">$599</span>
               </div>
             </div>
           </TabsContent>
