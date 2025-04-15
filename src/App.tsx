@@ -20,6 +20,8 @@ import AIGigs from "./pages/AIGigs";
 import HowItWorks from "./pages/HowItWorks";
 import Waitlist from "./pages/Waitlist";
 import ScrollToTop from "./components/ScrollToTop";
+import Checkout from "./pages/Checkout";
+import CustomAgentRequest from "./pages/CustomAgentRequest";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/waitlist" element={<Waitlist />} />
+          <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/custom-agent-request/:id" element={<CustomAgentRequest />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

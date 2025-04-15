@@ -1,11 +1,12 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import AuthHeader from "@/components/auth/AuthHeader";
 import LoginForm from "@/components/auth/LoginForm";
 import SignupForm from "@/components/auth/SignupForm";
 import MFASetup from "@/components/auth/MFASetup";
 import AuthFooter from "@/components/auth/AuthFooter";
+import { toast } from "@/hooks/use-toast";
 
 enum AuthStep {
   LOGIN = "login",
@@ -21,12 +22,30 @@ const Auth = () => {
   const [authStep, setAuthStep] = useState<AuthStep>(initialTab);
   const [email, setEmail] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
+  
+  // Get return URL from query params or localStorage
+  const returnUrl = searchParams.get("returnUrl") || localStorage.getItem("authRedirectUrl") || "/";
 
   const handleLoginSuccess = (data: { email: string, success: boolean }) => {
     if (data.success) {
       setEmail(data.email);
       setUserId(data.email); // In a real app, you'd store the actual user ID
-      setAuthStep(AuthStep.MFA);
+      localStorage.setItem("isAuthenticated", "true");
+      
+      // For demo purposes, we'll skip MFA when a return URL is specified
+      if (returnUrl && returnUrl !== "/") {
+        toast({
+          title: "Login successful!",
+          description: "Redirecting you to complete your action..."
+        });
+        // Clear the stored return URL
+        localStorage.removeItem("authRedirectUrl");
+        // Redirect to the return URL
+        navigate(returnUrl);
+      } else {
+        // Normal flow - proceed to MFA
+        setAuthStep(AuthStep.MFA);
+      }
     }
   };
 
@@ -35,11 +54,34 @@ const Auth = () => {
   };
 
   const handleMFAComplete = () => {
-    navigate("/");
+    localStorage.setItem("isAuthenticated", "true");
+    
+    // Check if there's a return URL
+    if (returnUrl && returnUrl !== "/") {
+      // Clear the stored return URL
+      localStorage.removeItem("authRedirectUrl");
+      // Redirect to the return URL
+      navigate(returnUrl);
+    } else {
+      // Default redirect
+      navigate("/");
+    }
   };
 
   const handleMFACancel = () => {
-    navigate("/");
+    // Even on cancel, we'll consider the user authenticated for demo purposes
+    localStorage.setItem("isAuthenticated", "true");
+    
+    // Check if there's a return URL
+    if (returnUrl && returnUrl !== "/") {
+      // Clear the stored return URL
+      localStorage.removeItem("authRedirectUrl");
+      // Redirect to the return URL
+      navigate(returnUrl);
+    } else {
+      // Default redirect
+      navigate("/");
+    }
   };
 
   return (
@@ -48,7 +90,9 @@ const Auth = () => {
         <div className="px-6 pt-6 pb-4">
           <AuthHeader 
             title="Welcome to Gignaati.com" 
-            description="Connect with the world's best AI talent" 
+            description={returnUrl !== "/" ? 
+              "Please log in to continue with your action" : 
+              "Connect with the world's best AI talent"} 
           />
         </div>
         

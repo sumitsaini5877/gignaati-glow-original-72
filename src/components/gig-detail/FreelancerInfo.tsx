@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Star, UserCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 interface FreelancerInfoProps {
   freelancer: {
@@ -12,10 +13,42 @@ interface FreelancerInfoProps {
     reviews: number;
     avatar: string;
   };
+  gigId: string | number; // Add gigId prop
 }
 
-const FreelancerInfo = ({ freelancer }: FreelancerInfoProps) => {
+const FreelancerInfo = ({ freelancer, gigId }: FreelancerInfoProps) => {
   const navigate = useNavigate();
+  
+  // Get user authentication status (in a real app, this would check your auth state)
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+  const handleChatWithFreelancer = () => {
+    if (isAuthenticated) {
+      // User is authenticated, proceed to messaging
+      navigate(`/messaging?freelancer=${freelancer.name}`);
+    } else {
+      // User is not authenticated, redirect to auth with return URL
+      const returnUrl = `/messaging?freelancer=${freelancer.name}`;
+      localStorage.setItem("authRedirectUrl", returnUrl);
+      navigate(`/auth?returnUrl=${encodeURIComponent(returnUrl)}`);
+    }
+  };
+
+  const handleRequestCustomAgent = () => {
+    if (isAuthenticated) {
+      // User is authenticated, proceed to custom agent request
+      toast({
+        title: "Custom Agent Request",
+        description: "Your custom agent request has been initiated."
+      });
+      navigate(`/custom-agent-request/${gigId}`);
+    } else {
+      // User is not authenticated, redirect to auth with return URL
+      const returnUrl = `/custom-agent-request/${gigId}`;
+      localStorage.setItem("authRedirectUrl", returnUrl);
+      navigate(`/auth?returnUrl=${encodeURIComponent(returnUrl)}`);
+    }
+  };
 
   return (
     <Card className="mb-6">
@@ -44,11 +77,11 @@ const FreelancerInfo = ({ freelancer }: FreelancerInfoProps) => {
         </div>
         
         <div className="space-y-2">
-          <Button variant="outline" className="w-full" onClick={() => navigate("/messaging")}>
+          <Button variant="outline" className="w-full" onClick={handleChatWithFreelancer}>
             <MessageSquare className="mr-2 h-4 w-4" />
             Chat with Freelancer
           </Button>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" onClick={handleRequestCustomAgent}>
             <UserCircle className="mr-2 h-4 w-4" />
             Request Custom Agent
           </Button>

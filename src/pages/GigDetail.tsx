@@ -105,8 +105,15 @@ const GigDetail = () => {
             <div className="flex flex-col space-y-6">
               {/* Both packages and freelancer info will be in a sticky container */}
               <div className="sticky top-24">
-                <PackageSelector packages={gig.packages} defaultPackage="training" />
-                <FreelancerInfo freelancer={gig.freelancer} />
+                <PackageSelector 
+                  packages={gig.packages} 
+                  defaultPackage="training" 
+                  gigId={gig.id}
+                />
+                <FreelancerInfo 
+                  freelancer={gig.freelancer}
+                  gigId={gig.id}
+                />
               </div>
             </div>
           </div>

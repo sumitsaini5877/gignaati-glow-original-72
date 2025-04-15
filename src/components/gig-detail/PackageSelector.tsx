@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 interface PackageDetails {
   name: string;
@@ -15,10 +17,31 @@ interface PackageDetails {
 interface PackageSelectorProps {
   packages: Record<string, PackageDetails>;
   defaultPackage?: string;
+  gigId: string | number; // Add gigId prop
 }
 
-const PackageSelector = ({ packages, defaultPackage = "training" }: PackageSelectorProps) => {
+const PackageSelector = ({ packages, defaultPackage = "training", gigId }: PackageSelectorProps) => {
   const [selectedPackage, setSelectedPackage] = useState(defaultPackage);
+  const navigate = useNavigate();
+  
+  // Get user authentication status (in a real app, this would check your auth state)
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  
+  const handleSelectPackage = () => {
+    if (isAuthenticated) {
+      // User is authenticated, proceed to checkout
+      toast({
+        title: "Package selected!",
+        description: `You selected the ${packages[selectedPackage].name} package.`
+      });
+      navigate(`/checkout/${gigId}?package=${selectedPackage}`);
+    } else {
+      // User is not authenticated, redirect to auth with return URL
+      const returnUrl = `/checkout/${gigId}?package=${selectedPackage}`;
+      localStorage.setItem("authRedirectUrl", returnUrl);
+      navigate(`/auth?returnUrl=${encodeURIComponent(returnUrl)}`);
+    }
+  };
 
   return (
     <Card className="mb-6">
@@ -50,7 +73,12 @@ const PackageSelector = ({ packages, defaultPackage = "training" }: PackageSelec
                   <span className="font-medium">{pkg.revisions}</span>
                 </div>
               </div>
-              <Button className="w-full bg-gignaati-coral hover:bg-red-500 mt-4">Select & Continue</Button>
+              <Button 
+                className="w-full bg-gignaati-coral hover:bg-red-500 mt-4"
+                onClick={handleSelectPackage}
+              >
+                Select & Continue
+              </Button>
             </TabsContent>
           ))}
         </Tabs>
