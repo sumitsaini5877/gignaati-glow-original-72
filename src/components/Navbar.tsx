@@ -1,14 +1,23 @@
 
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleSignIn = () => {
+    navigate('/auth');
+  };
+
+  const handleRegister = () => {
+    navigate('/auth?tab=signup');
   };
 
   return (
@@ -33,12 +42,14 @@ const Navbar = () => {
           <Button 
             variant="default" 
             className="bg-black hover:bg-gray-800 text-white rounded-md"
+            onClick={handleRegister}
           >
             REGISTER
           </Button>
           <Button 
             variant="default" 
             className="bg-gignaati-coral hover:bg-red-500 text-white rounded-md"
+            onClick={handleSignIn}
           >
             SIGN IN
           </Button>
@@ -59,12 +70,14 @@ const Navbar = () => {
               <Button 
                 variant="default" 
                 className="bg-black hover:bg-gray-800 text-white w-full"
+                onClick={handleRegister}
               >
                 REGISTER
               </Button>
               <Button 
                 variant="default" 
                 className="bg-gignaati-coral hover:bg-red-500 text-white w-full"
+                onClick={handleSignIn}
               >
                 SIGN IN
               </Button>
@@ -81,7 +94,7 @@ const NavLinks = ({ mobile = false }: { mobile?: boolean }) => {
     { name: 'Home', path: '/' },
     { name: 'AI Gigs', path: '/ai-gigs' },
     { name: 'AI Projects', path: '/ai-projects' },
-    { name: 'How It Work', path: '/how-it-works' },
+    { name: 'How It Works', path: '/how-it-works' },
     { name: 'AI Academy', path: '/ai-academy' },
     { name: 'Blog', path: '/blog' },
   ];
