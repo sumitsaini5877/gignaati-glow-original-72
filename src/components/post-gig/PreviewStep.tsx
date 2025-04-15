@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
@@ -166,14 +165,14 @@ const PreviewStep = ({ formData }: PreviewStepProps) => {
                     <p className="text-gray-700 whitespace-pre-line">
                       {formData.tokenomics || "No tokenomics information provided"}
                     </p>
-                    
+          
                     <div className="mt-6 space-y-6">
                       <div className="border rounded-lg p-4">
                         <h3 className="font-semibold text-lg mb-3 flex items-center">
                           <Coins className="h-5 w-5 mr-2 text-gignaati-coral" />
                           Cost Breakdown
                         </h3>
-                        
+              
                         <div className="space-y-3">
                           <div className="grid grid-cols-2 gap-2">
                             <div className="border rounded p-3 bg-gray-50">
