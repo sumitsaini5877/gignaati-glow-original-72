@@ -21,7 +21,7 @@ const PackageSelector = ({ packages, defaultPackage = "training" }: PackageSelec
   const [selectedPackage, setSelectedPackage] = useState(defaultPackage);
 
   return (
-    <Card className="mb-6 sticky top-24">
+    <Card className="mb-6">
       <CardHeader>
         <CardTitle>Packages</CardTitle>
       </CardHeader>
