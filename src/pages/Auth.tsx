@@ -1,84 +1,65 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSearchParams } from "react-router-dom";
+import AuthHeader from "@/components/auth/AuthHeader";
 import LoginForm from "@/components/auth/LoginForm";
 import SignupForm from "@/components/auth/SignupForm";
-import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
-import AuthHeader from "@/components/auth/AuthHeader";
-import AuthFooter from "@/components/auth/AuthFooter";
 import MFASetup from "@/components/auth/MFASetup";
+import AuthFooter from "@/components/auth/AuthFooter";
+
+enum AuthStep {
+  LOGIN = "login",
+  SIGNUP = "signup",
+  MFA = "mfa",
+}
 
 const Auth = () => {
-  const navigate = useNavigate();
-  const [showMFASetup, setShowMFASetup] = useState(false);
-  const [userId, setUserId] = useState("");
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get("tab") === "signup" ? AuthStep.SIGNUP : AuthStep.LOGIN;
+  
+  const [authStep, setAuthStep] = useState<AuthStep>(initialTab);
+  const [email, setEmail] = useState<string>("");
 
-  const handleLoginSuccess = (data: { email: string, success: boolean }) => {
-    if (data.success) {
-      // In a real app, check if user already has MFA enabled
-      // For demo purposes, we'll always show the MFA setup
-      setUserId(data.email);
-      setShowMFASetup(true);
-    }
+  const handleCompleteLogin = (userEmail: string) => {
+    setEmail(userEmail);
+    setAuthStep(AuthStep.MFA);
   };
 
-  const handleMFAComplete = () => {
-    navigate("/");
+  const handleToggleForm = () => {
+    setAuthStep(authStep === AuthStep.LOGIN ? AuthStep.SIGNUP : AuthStep.LOGIN);
   };
-
-  const handleMFACancel = () => {
-    navigate("/");
-  };
-
-  // Show MFA setup screen if login was successful
-  if (showMFASetup) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-        <MFASetup 
-          userId={userId}
-          onComplete={handleMFAComplete}
-          onCancel={handleMFACancel}
-        />
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <Card className="w-full max-w-md shadow-xl rounded-xl">
-        <CardHeader className="space-y-2 text-center">
-          <AuthHeader 
-            title="Welcome to Gignaati.com" 
-            description="Connect with the world's best AI talent"
-          />
-        </CardHeader>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#14213D] to-[#1e3a6a] py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="px-6 pt-6 pb-4">
+          <AuthHeader />
+        </div>
         
-        <Tabs defaultValue="login" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
-          </TabsList>
+        <div className="px-6 py-8">
+          {authStep === AuthStep.LOGIN && (
+            <LoginForm 
+              onComplete={handleCompleteLogin}
+              onToggleForm={handleToggleForm}
+            />
+          )}
           
-          <TabsContent value="login">
-            <CardContent>
-              <LoginForm onSuccess={handleLoginSuccess} />
-            </CardContent>
-          </TabsContent>
+          {authStep === AuthStep.SIGNUP && (
+            <SignupForm 
+              onComplete={handleCompleteLogin}
+              onToggleForm={handleToggleForm}
+            />
+          )}
           
-          <TabsContent value="signup">
-            <CardContent>
-              <SignupForm />
-            </CardContent>
-          </TabsContent>
-        </Tabs>
+          {authStep === AuthStep.MFA && (
+            <MFASetup email={email} />
+          )}
+        </div>
         
-        <CardFooter className="flex flex-col space-y-4 pt-0">
-          <SocialLoginButtons />
+        <div className="bg-gray-50 px-6 py-4">
           <AuthFooter />
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };
