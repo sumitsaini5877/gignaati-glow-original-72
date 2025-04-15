@@ -100,16 +100,16 @@ const GigDetail = () => {
             />
           </div>
           
-          {/* Right Sidebar - improved sticky positioning */}
+          {/* Right Sidebar - Fixed positioning for both components */}
           <div className="lg:col-span-1">
             <div className="flex flex-col space-y-6">
               {/* Packages with sticky positioning */}
-              <div className="sticky top-24 z-10 pt-2">
+              <div className="sticky top-24 z-10">
                 <PackageSelector packages={gig.packages} defaultPackage="training" />
               </div>
               
-              {/* Freelancer Info with sticky positioning that won't overlap */}
-              <div className="sticky top-[420px] z-0">
+              {/* Freelancer Info with fixed positioning */}
+              <div className="fixed w-[calc(25%-2rem)] max-w-xs">
                 <FreelancerInfo freelancer={gig.freelancer} />
               </div>
             </div>
