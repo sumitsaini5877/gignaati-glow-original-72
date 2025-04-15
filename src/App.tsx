@@ -18,6 +18,7 @@ import Messaging from "./pages/Messaging";
 import Wallet from "./pages/Wallet";
 import AIGigs from "./pages/AIGigs";
 import HowItWorks from "./pages/HowItWorks";
+import Waitlist from "./pages/Waitlist";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/support" element={<Support />} />
           <Route path="/messaging" element={<Messaging />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/waitlist" element={<Waitlist />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
