@@ -18,13 +18,20 @@ interface PackageBuilderStepProps {
 }
 
 const PackageBuilderStep = ({ packages, onPackageChange }: PackageBuilderStepProps) => {
+  // Ensure packages is an object, not null or undefined
+  const safePackages = packages || {
+    setup: { title: "Setup", description: "", price: "", deliveryTime: "" },
+    training: { title: "Training", description: "", price: "", deliveryTime: "" },
+    customization: { title: "Customization", description: "", price: "", deliveryTime: "" }
+  };
+
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold mb-4">Package Builder</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {Object.keys(packages).map((packageType) => {
-          const pkg = packages[packageType];
+        {Object.keys(safePackages).map((packageType) => {
+          const pkg = safePackages[packageType];
           return (
             <Card key={packageType} className="overflow-hidden">
               <div className={`p-4 text-white text-center ${
