@@ -1,3 +1,4 @@
+
 import { Badge } from "@/components/ui/badge";
 import {
   Code,
@@ -49,39 +50,44 @@ interface TagsPreviewProps {
   tags: string[];
 }
 
-const TagsPreview = ({ tags }: TagsPreviewProps) => (
-  <div>
-    <h3 className="font-medium text-gray-500">Tags</h3>
-    
-    {tags.length > 0 ? (
-      <>
-        <div className="flex flex-wrap gap-2 mt-1">
-          {tags.map((tag, index) => (
-            <span key={index} className="bg-gray-100 px-3 py-1 rounded-full text-sm">
-              {tag}
-            </span>
-          ))}
-        </div>
-        
-        <div className="mt-4 bg-gray-50 p-4 rounded-lg">
-          <h4 className="text-sm font-medium mb-3">Tag Cloud</h4>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag, index) => {
-              const TagIcon = getTagIcon(tag);
-              return (
-                <Badge key={index} variant="outline" className="flex items-center gap-1 bg-white border py-1 px-2">
-                  <TagIcon className="h-3.5 w-3.5 text-gray-600" />
-                  <span>{tag}</span>
-                </Badge>
-              );
-            })}
+const TagsPreview = ({ tags }: TagsPreviewProps) => {
+  // Ensure tags is an array even if it's undefined
+  const safeTags = Array.isArray(tags) ? tags : [];
+  
+  return (
+    <div>
+      <h3 className="font-medium text-gray-500">Tags</h3>
+      
+      {safeTags.length > 0 ? (
+        <>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {safeTags.map((tag, index) => (
+              <span key={index} className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                {tag}
+              </span>
+            ))}
           </div>
-        </div>
-      </>
-    ) : (
-      <p className="text-gray-600">No tags provided</p>
-    )}
-  </div>
-);
+          
+          <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+            <h4 className="text-sm font-medium mb-3">Tag Cloud</h4>
+            <div className="flex flex-wrap gap-2">
+              {safeTags.map((tag, index) => {
+                const TagIcon = getTagIcon(tag);
+                return (
+                  <Badge key={index} variant="outline" className="flex items-center gap-1 bg-white border py-1 px-2">
+                    <TagIcon className="h-3.5 w-3.5 text-gray-600" />
+                    <span>{tag}</span>
+                  </Badge>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      ) : (
+        <p className="text-gray-600">No tags provided</p>
+      )}
+    </div>
+  );
+};
 
 export default TagsPreview;

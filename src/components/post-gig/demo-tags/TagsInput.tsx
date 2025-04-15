@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -78,6 +79,9 @@ interface TagsInputProps {
 const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
   const [inputValue, setInputValue] = useState("");
 
+  // Ensure tags is an array even if it's undefined
+  const safeTags = Array.isArray(tags) ? tags : [];
+
   const handleAddTag = () => {
     if (inputValue.trim()) {
       onTagInput(inputValue.trim());
@@ -93,7 +97,7 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
   };
 
   const handleSelectCommonTag = (value: string) => {
-    if (!tags.includes(value)) {
+    if (!safeTags.includes(value)) {
       onTagInput(value);
     }
   };
@@ -107,7 +111,7 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
       </div>
       
       <div className="flex flex-wrap gap-2 mb-2">
-        {tags.map((tag, index) => {
+        {safeTags.map((tag, index) => {
           const TagIcon = getTagIcon(tag);
           return (
             <Badge key={index} variant="outline" className="flex items-center gap-1 bg-white border py-2 px-3">
@@ -146,7 +150,7 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {commonTags.map((tag) => {
             const TagIcon = tagIcons[tag] || Bot;
-            const isSelected = tags.includes(tag);
+            const isSelected = safeTags.includes(tag);
             return (
               <Button
                 key={tag}
@@ -167,7 +171,7 @@ const TagsInput = ({ tags, onTagInput, onRemoveTag }: TagsInputProps) => {
       <div className="mt-4 bg-gray-50 p-4 rounded-lg">
         <h3 className="text-sm font-medium mb-3">Tag Cloud Preview</h3>
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag, index) => {
+          {safeTags.map((tag, index) => {
             const TagIcon = getTagIcon(tag);
             return (
               <Badge key={index} variant="outline" className="flex items-center gap-1 bg-white border py-1 px-2">
