@@ -10,7 +10,7 @@ import { Star, MessageSquare, UserCircle } from "lucide-react";
 
 const GigDetail = () => {
   const { id } = useParams();
-  const [selectedPackage, setSelectedPackage] = useState("standard");
+  const [selectedPackage, setSelectedPackage] = useState("training");
 
   // Mock data - replace with actual API call later
   const gig = {
@@ -25,24 +25,24 @@ const GigDetail = () => {
       avatar: "/placeholder.svg"
     },
     packages: {
-      base: {
-        name: "Base",
+      setup: {
+        name: "Setup",
         price: 199,
-        description: "Basic GPT model with standard features and 1 week of support",
+        description: "Initial setup of your AI assistant with basic configuration and 1 week of support",
         deliveryTime: "3 days",
         revisions: 1
       },
-      standard: {
-        name: "Standard",
+      training: {
+        name: "Training",
         price: 349,
-        description: "Enhanced GPT model with advanced features, customized for your brand, and 2 weeks of support",
+        description: "Enhanced AI model with training on your specific content, customized for your brand, and 2 weeks of support",
         deliveryTime: "5 days",
         revisions: 3
       },
-      premium: {
-        name: "Premium",
+      customization: {
+        name: "Customization",
         price: 599,
-        description: "Fully customized enterprise GPT model with premium features, advanced integration options, and 1 month of support",
+        description: "Fully customized enterprise AI solution with advanced integration options, fine-tuned algorithms, and 1 month of support",
         deliveryTime: "7 days",
         revisions: "Unlimited"
       }
@@ -173,11 +173,11 @@ const GigDetail = () => {
                 <CardTitle>Packages</CardTitle>
               </CardHeader>
               <CardContent>
-                <Tabs defaultValue="standard" value={selectedPackage} onValueChange={setSelectedPackage}>
+                <Tabs defaultValue="training" value={selectedPackage} onValueChange={setSelectedPackage}>
                   <TabsList className="grid grid-cols-3 mb-6">
-                    <TabsTrigger value="base">Base</TabsTrigger>
-                    <TabsTrigger value="standard">Standard</TabsTrigger>
-                    <TabsTrigger value="premium">Premium</TabsTrigger>
+                    <TabsTrigger value="setup">Setup</TabsTrigger>
+                    <TabsTrigger value="training">Training</TabsTrigger>
+                    <TabsTrigger value="customization">Customization</TabsTrigger>
                   </TabsList>
                   
                   {Object.entries(gig.packages).map(([key, pkg]) => (

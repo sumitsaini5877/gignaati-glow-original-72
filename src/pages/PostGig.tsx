@@ -35,9 +35,9 @@ const PostGig = () => {
     demoLink: "",
     tags: [],
     packages: {
-      base: { title: "Base", description: "", price: "", deliveryTime: "" },
-      standard: { title: "Standard", description: "", price: "", deliveryTime: "" },
-      premium: { title: "Premium", description: "", price: "", deliveryTime: "" }
+      setup: { title: "Setup", description: "", price: "", deliveryTime: "" },
+      training: { title: "Training", description: "", price: "", deliveryTime: "" },
+      customization: { title: "Customization", description: "", price: "", deliveryTime: "" }
     }
   });
   
@@ -262,9 +262,9 @@ const PostGig = () => {
                         return (
                           <Card key={packageType} className="overflow-hidden">
                             <div className={`p-4 text-white text-center ${
-                              packageType === 'base' 
+                              packageType === 'setup' 
                                 ? 'bg-gray-600' 
-                                : packageType === 'standard' 
+                                : packageType === 'training' 
                                   ? 'bg-gignaati-coral' 
                                   : 'bg-blue-600'
                             }`}>
@@ -367,9 +367,9 @@ const PostGig = () => {
                             return (
                               <Card key={packageType} className="overflow-hidden">
                                 <div className={`p-2 text-white text-center ${
-                                  packageType === 'base' 
+                                  packageType === 'setup' 
                                     ? 'bg-gray-600' 
-                                    : packageType === 'standard' 
+                                    : packageType === 'training' 
                                       ? 'bg-gignaati-coral' 
                                       : 'bg-blue-600'
                                 }`}>
