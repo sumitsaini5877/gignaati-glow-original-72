@@ -8,12 +8,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
 
 interface LoginFormProps {
   onSuccess?: (data: { email: string, success: boolean }) => void;
+  onToggleForm?: () => void;
 }
 
-const LoginForm = ({ onSuccess }: LoginFormProps) => {
+const LoginForm = ({ onSuccess, onToggleForm }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -123,6 +125,23 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
         >
           {loading ? "Logging in..." : "Login"}
         </Button>
+
+        <div className="mt-6">
+          <SocialLoginButtons />
+        </div>
+
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-500">
+            Don't have an account?{" "}
+            <button 
+              type="button"
+              className="text-blue-600 hover:underline"
+              onClick={onToggleForm}
+            >
+              Sign up here
+            </button>
+          </p>
+        </div>
       </div>
     </form>
   );
