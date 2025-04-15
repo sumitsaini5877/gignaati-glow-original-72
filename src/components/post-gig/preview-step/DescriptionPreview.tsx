@@ -4,15 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   BookOpen, 
   GitCompare, 
-  Coins, 
-  Award 
+  Coins
 } from "lucide-react";
 import {
   OverviewTabContent,
   PrerequisitesTabContent,
   ManualVsAiTabContent,
-  TokenomicsTabContent,
-  BenefitsTabContent
+  TokenomicsTabContent
 } from "./description-tabs";
 
 interface FormData {
@@ -20,7 +18,6 @@ interface FormData {
   prerequisites: string;
   manualVsAi: string;
   tokenomics: string;
-  benefits: string;
 }
 
 interface DescriptionPreviewProps {
@@ -33,7 +30,7 @@ const DescriptionPreview = ({ formData }: DescriptionPreviewProps) => (
     <Card className="mt-2">
       <CardContent className="p-4">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid grid-cols-5 mb-4 w-full">
+          <TabsList className="grid grid-cols-4 mb-4 w-full">
             <TabsTrigger value="overview" className="text-xs md:text-sm flex items-center gap-1">
               <BookOpen className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden md:inline">Overview</span>
@@ -49,10 +46,6 @@ const DescriptionPreview = ({ formData }: DescriptionPreviewProps) => (
             <TabsTrigger value="tokenomics" className="text-xs md:text-sm flex items-center gap-1">
               <Coins className="h-3 w-3 md:h-4 md:w-4" />
               <span className="hidden md:inline">Tokenomics</span>
-            </TabsTrigger>
-            <TabsTrigger value="benefits" className="text-xs md:text-sm flex items-center gap-1">
-              <Award className="h-3 w-3 md:h-4 md:w-4" />
-              <span className="hidden md:inline">Benefits</span>
             </TabsTrigger>
           </TabsList>
           
@@ -70,10 +63,6 @@ const DescriptionPreview = ({ formData }: DescriptionPreviewProps) => (
           
           <TabsContent value="tokenomics" className="mt-0">
             <TokenomicsTabContent tokenomics={formData.tokenomics} />
-          </TabsContent>
-          
-          <TabsContent value="benefits" className="mt-0">
-            <BenefitsTabContent benefits={formData.benefits} />
           </TabsContent>
         </Tabs>
       </CardContent>

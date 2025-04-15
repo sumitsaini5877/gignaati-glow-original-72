@@ -6,15 +6,13 @@ import {
   BookOpen, 
   User, 
   Coins, 
-  GitCompare, 
-  Award
+  GitCompare
 } from "lucide-react";
 import {
   OverviewTab,
   PrerequisitesTab,
   ManualVsAiTab,
-  TokenomicsTab,
-  BenefitsTab
+  TokenomicsTab
 } from "./description-tabs";
 
 interface GigDescriptionProps {
@@ -23,7 +21,6 @@ interface GigDescriptionProps {
   agentDetail?: string;
   manualVsAi?: string;
   tokenomics?: string;
-  benefits?: string;
 }
 
 const GigDescription = ({ 
@@ -31,8 +28,7 @@ const GigDescription = ({
   prerequisites = "Familiarity with prompting, basic understanding of GPT models, and willingness to learn.",
   agentDetail = "The AI agent is trained on your specific content and can produce high-quality tailored content for your needs.",
   manualVsAi = "Manual content creation takes 3-5 hours per piece, while our AI solution delivers comparable quality in minutes. Traditional methods involve hiring writers, extensive editing, and long turnaround times.",
-  tokenomics = "Pay-per-use pricing structure with volume discounts. No hidden fees or subscriptions required.",
-  benefits = "Time savings, consistent quality, SEO optimization, and 24/7 availability. Scale your content production without scaling your team."
+  tokenomics = "Pay-per-use pricing structure with volume discounts. No hidden fees or subscriptions required."
 }: GigDescriptionProps) => {
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -43,7 +39,7 @@ const GigDescription = ({
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-5 mb-6 w-full">
+          <TabsList className="grid grid-cols-4 mb-6 w-full">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BookOpen className="h-4 w-4" />
               <span className="hidden sm:inline">Overview</span>
@@ -59,10 +55,6 @@ const GigDescription = ({
             <TabsTrigger value="tokenomics" className="flex items-center gap-2">
               <Coins className="h-4 w-4" />
               <span className="hidden sm:inline">Tokenomics</span>
-            </TabsTrigger>
-            <TabsTrigger value="benefits" className="flex items-center gap-2">
-              <Award className="h-4 w-4" />
-              <span className="hidden sm:inline">Benefits</span>
             </TabsTrigger>
           </TabsList>
           
@@ -80,10 +72,6 @@ const GigDescription = ({
           
           <TabsContent value="tokenomics">
             <TokenomicsTab tokenomics={tokenomics} />
-          </TabsContent>
-          
-          <TabsContent value="benefits">
-            <BenefitsTab benefits={benefits} />
           </TabsContent>
         </Tabs>
       </CardContent>
