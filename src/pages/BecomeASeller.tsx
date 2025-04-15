@@ -51,6 +51,10 @@ const BecomeASeller = () => {
     navigate("/");
   };
 
+  const handleAlreadyVerified = () => {
+    navigate('/auth');
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
@@ -196,6 +200,18 @@ const BecomeASeller = () => {
               >
                 Submit Application
               </Button>
+              
+              {/* New button for already verified users */}
+              <div className="text-center mt-4">
+                <Button 
+                  type="button"
+                  variant="link"
+                  className="text-indigo-600 hover:text-indigo-800"
+                  onClick={handleAlreadyVerified}
+                >
+                  Already verified? Click Here
+                </Button>
+              </div>
             </form>
           </Form>
         </div>
