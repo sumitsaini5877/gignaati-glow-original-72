@@ -2,7 +2,7 @@
 import React from "react";
 import { BookOpen, Code, Layout, MessageSquareText } from "lucide-react";
 
-// Custom icons
+// Custom icons (already existing)
 export const Edit = ({ className }: { className?: string }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
@@ -78,23 +78,24 @@ export const Trophy = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// Add a Default icon
+const Default = ({ className }: { className?: string }) => (
+  <BookOpen className={className} />
+);
+
+// Create an Icons object that maps categories to icons
+export const Icons = {
+  "Prompt Engineering": Edit,
+  "Design": Layout,
+  "Development": Code,
+  "Automation": Zap,
+  "Model Development": Cpu,
+  "Chatbots": MessageSquareText,
+  "Default": Default
+};
+
 export const getCourseIcon = (category: string) => {
   const iconClass = "h-16 w-16 text-white opacity-80";
-  
-  switch (category.toLowerCase()) {
-    case "prompt engineering":
-      return <Edit className={iconClass} />;
-    case "design":
-      return <Layout className={iconClass} />;
-    case "development":
-      return <Code className={iconClass} />;
-    case "automation":
-      return <Zap className={iconClass} />;
-    case "model development":
-      return <Cpu className={iconClass} />;
-    case "chatbots":
-      return <MessageSquareText className={iconClass} />;
-    default:
-      return <BookOpen className={iconClass} />;
-  }
+  const IconComponent = Icons[category as keyof typeof Icons] || Icons.Default;
+  return <IconComponent className={iconClass} />;
 };
