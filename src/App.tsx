@@ -22,6 +22,9 @@ import Checkout from "./pages/Checkout";
 import CustomAgentRequest from "./pages/CustomAgentRequest";
 import UserProfile from "./pages/UserProfile";
 import Waitlist from "./pages/Waitlist";
+import Onboarding from "./pages/Onboarding";
+import CreatorDashboard from "./pages/CreatorDashboard";
+import BuyerDashboard from "./pages/BuyerDashboard";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +52,9 @@ const App = () => (
           <Route path="/custom-agent-request/:id" element={<CustomAgentRequest />} />
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/waitlist" element={<Waitlist />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/creator-dashboard" element={<CreatorDashboard />} />
+          <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

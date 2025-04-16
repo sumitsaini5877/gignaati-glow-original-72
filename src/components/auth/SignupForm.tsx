@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import SocialLoginButtons from "@/components/auth/SocialLoginButtons";
+import { useNavigate } from "react-router-dom";
 
 interface SignupFormProps {
   onToggleForm?: () => void;
@@ -18,6 +19,7 @@ const SignupForm = ({ onToggleForm }: SignupFormProps) => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,11 +33,21 @@ const SignupForm = ({ onToggleForm }: SignupFormProps) => {
       
       if (error) throw error;
       
+      // Set the temporary Explorer role in localStorage
+      localStorage.setItem('userRole', 'Explorer');
+      localStorage.setItem('isNewUser', 'true');
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userName', email.split('@')[0]);
+      localStorage.setItem('userEmail', email);
+      
       toast({
         title: "Account created!",
-        description: "Please check your email for verification.",
+        description: "Welcome to Gignaati. Let's start your journey!",
       });
 
+      // Redirect to the tour welcome page
+      navigate('/onboarding');
+      
       return { success: true };
     } catch (error: any) {
       toast({
