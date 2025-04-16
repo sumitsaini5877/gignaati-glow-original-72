@@ -48,12 +48,10 @@ const Navbar = () => {
     navigate('/become-a-seller');
   };
 
-  const handleBuyAndTry = () => {
-    // If not authenticated, redirect to auth page and set return URL
-    if (!isAuthenticated) {
-      localStorage.setItem('authRedirectUrl', '/');
-      navigate('/auth');
-    }
+  const handleLogin = () => {
+    // Navigate to auth page
+    localStorage.setItem('authRedirectUrl', '/');
+    navigate('/auth');
   };
 
   const handleLogout = () => {
@@ -83,7 +81,7 @@ const Navbar = () => {
           userName={userName}
           userImage={userImage}
           handleLogout={handleLogout}
-          handleBuyAndTry={handleBuyAndTry}
+          handleLogin={handleLogin}
           handleBecomeSeller={handleBecomeSeller}
         />
 
@@ -100,7 +98,7 @@ const Navbar = () => {
           userName={userName}
           userImage={userImage}
           handleLogout={handleLogout}
-          handleBuyAndTry={handleBuyAndTry}
+          handleLogin={handleLogin}
           handleBecomeSeller={handleBecomeSeller}
         />
       )}

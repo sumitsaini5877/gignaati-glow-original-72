@@ -1,5 +1,5 @@
 
-import { User, LogOut } from 'lucide-react';
+import { User, LogOut, LogIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import NavLinks from './NavLinks';
@@ -10,7 +10,7 @@ interface MobileMenuProps {
   userName: string;
   userImage: string;
   handleLogout: () => void;
-  handleBuyAndTry: () => void;
+  handleLogin: () => void;
   handleBecomeSeller: () => void;
 }
 
@@ -19,7 +19,7 @@ const MobileMenu = ({
   userName, 
   userImage, 
   handleLogout, 
-  handleBuyAndTry,
+  handleLogin,
   handleBecomeSeller
 }: MobileMenuProps) => {
   const navigate = useNavigate();
@@ -62,10 +62,11 @@ const MobileMenu = ({
           ) : (
             <Button 
               variant="outline" 
-              className="w-full"
-              onClick={handleBuyAndTry}
+              className="w-full flex items-center justify-center gap-2"
+              onClick={handleLogin}
             >
-              Buy and Try
+              <LogIn size={16} />
+              Login
             </Button>
           )}
           

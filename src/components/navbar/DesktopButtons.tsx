@@ -1,6 +1,7 @@
 
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { LogIn } from 'lucide-react';
 import UserMenuButton from './UserMenuButton';
 
 interface DesktopButtonsProps {
@@ -8,7 +9,7 @@ interface DesktopButtonsProps {
   userName: string;
   userImage: string;
   handleLogout: () => void;
-  handleBuyAndTry: () => void;
+  handleLogin: () => void;
   handleBecomeSeller: () => void;
 }
 
@@ -17,12 +18,12 @@ const DesktopButtons = ({
   userName, 
   userImage, 
   handleLogout, 
-  handleBuyAndTry,
+  handleLogin,
   handleBecomeSeller 
 }: DesktopButtonsProps) => {
   return (
     <div className="hidden md:flex items-center space-x-4">
-      {/* Buy and Try / User Profile Button */}
+      {/* Login / User Profile Button */}
       {isAuthenticated ? (
         <UserMenuButton 
           userName={userName} 
@@ -32,10 +33,11 @@ const DesktopButtons = ({
       ) : (
         <Button 
           variant="outline" 
-          className="border-gray-300"
-          onClick={handleBuyAndTry}
+          className="border-gray-300 flex items-center gap-2"
+          onClick={handleLogin}
         >
-          Buy and Try
+          <LogIn size={16} />
+          Login
         </Button>
       )}
       
