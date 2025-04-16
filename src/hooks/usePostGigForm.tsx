@@ -1,5 +1,7 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 export interface GigFormData {
   title: string;
@@ -29,9 +31,11 @@ export interface PostGigFormHandlers {
   handleRemoveVideo: () => void;
   saveDraft: () => void;
   publishGig: () => void;
+  loadSavedFormData: (data: GigFormData) => void;
 }
 
 export default function usePostGigForm(): [GigFormData, PostGigFormHandlers] {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<GigFormData>({
     title: "",
     description: "",
@@ -113,12 +117,67 @@ export default function usePostGigForm(): [GigFormData, PostGigFormHandlers] {
     });
   };
   
+  const loadSavedFormData = (data: GigFormData) => {
+    setFormData(data);
+  };
+  
   const saveDraft = () => {
+    // Check if user is authenticated
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    
+    if (!isAuthenticated) {
+      // Save form data to localStorage for retrieval after auth
+      localStorage.setItem("savedPostGigForm", JSON.stringify(formData));
+      
+      // Redirect to auth page
+      toast({
+        title: "Authentication required",
+        description: "Please log in to save your gig draft."
+      });
+      
+      navigate('/auth');
+      return;
+    }
+    
+    // If authenticated, proceed with saving the draft
     console.log("Saving as draft:", formData);
+    toast({
+      title: "Draft saved",
+      description: "Your gig draft has been saved successfully."
+    });
   };
 
   const publishGig = () => {
+    // Check if user is authenticated
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    
+    if (!isAuthenticated) {
+      // Save form data to localStorage for retrieval after auth
+      localStorage.setItem("savedPostGigForm", JSON.stringify(formData));
+      // Set flag to submit after auth
+      localStorage.setItem("submitPostGigAfterAuth", "true");
+      
+      // Redirect to auth page
+      toast({
+        title: "Authentication required",
+        description: "Please log in to publish your gig."
+      });
+      
+      navigate('/auth');
+      return;
+    }
+    
+    // If authenticated, proceed with publishing
     console.log("Submitting gig:", formData);
+    toast({
+      title: "Gig published!",
+      description: "Your gig has been successfully published."
+    });
+    
+    // Redirect to the freelancer dashboard or another appropriate page
+    setTimeout(() => {
+      navigate('/freelancer-dashboard');
+    }, 1500);
   };
 
   const handlers: PostGigFormHandlers = {
@@ -131,7 +190,8 @@ export default function usePostGigForm(): [GigFormData, PostGigFormHandlers] {
     handleRemoveImage,
     handleRemoveVideo,
     saveDraft,
-    publishGig
+    publishGig,
+    loadSavedFormData
   };
 
   return [formData, handlers];

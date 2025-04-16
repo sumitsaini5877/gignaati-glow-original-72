@@ -23,6 +23,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Checkout from "./pages/Checkout";
 import CustomAgentRequest from "./pages/CustomAgentRequest";
 import UserProfile from "./pages/UserProfile";
+import Waitlist from "./pages/Waitlist";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/custom-agent-request/:id" element={<CustomAgentRequest />} />
           <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/waitlist" element={<Waitlist />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

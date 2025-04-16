@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft, Save, Send } from "lucide-react";
 
 interface NavigationButtonsProps {
   currentStep: number;
@@ -45,13 +45,16 @@ const NavigationButtons = ({
           <Button 
             variant="outline"
             onClick={onSaveDraft}
+            className="flex items-center gap-2"
           >
+            <Save size={16} />
             Save as Draft
           </Button>
           <Button 
-            className="bg-gignaati-coral hover:bg-red-500"
+            className="bg-gignaati-coral hover:bg-red-500 flex items-center gap-2"
             onClick={onPublish}
           >
+            <Send size={16} />
             Publish Gig
           </Button>
         </div>

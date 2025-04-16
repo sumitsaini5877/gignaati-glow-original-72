@@ -97,7 +97,9 @@ const Auth = () => {
         <div className="px-6 pt-6 pb-4">
           <AuthHeader 
             title="Welcome to Gignaati.com" 
-            description={returnUrl !== "/" ? 
+            description={returnUrl.includes("post-gig") ? 
+              "Please log in to continue posting your gig" : 
+              returnUrl !== "/" ? 
               "Please log in to continue with your action" : 
               "Connect with the world's best AI talent"} 
           />
@@ -126,8 +128,13 @@ const Auth = () => {
           )}
         </div>
         
-        <div className="bg-gray-50 px-6 py-4">
+        <div className="bg-gray-50 px-6 py-4 flex items-center justify-between">
           <AuthFooter />
+          <div className="text-sm">
+            <a href="/waitlist" className="text-blue-600 hover:underline">
+              Join Waitlist
+            </a>
+          </div>
         </div>
       </div>
     </div>
