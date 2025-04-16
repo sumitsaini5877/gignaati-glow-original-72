@@ -9,8 +9,6 @@ import NotFound from "./pages/NotFound";
 import BrowseGigs from "./pages/BrowseGigs";
 import GigDetail from "./pages/GigDetail";
 import PostGig from "./pages/PostGig";
-import ClientDashboard from "./pages/ClientDashboard";
-import FreelancerDashboard from "./pages/FreelancerDashboard";
 import AdminConsole from "./pages/AdminConsole";
 import Auth from "./pages/Auth";
 import Support from "./pages/Support";
@@ -41,8 +39,6 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/gig/:id" element={<GigDetail />} />
           <Route path="/post-gig" element={<PostGig />} />
-          <Route path="/client-dashboard" element={<ClientDashboard />} />
-          <Route path="/freelancer-dashboard" element={<FreelancerDashboard />} />
           <Route path="/admin" element={<AdminConsole />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/support" element={<Support />} />
