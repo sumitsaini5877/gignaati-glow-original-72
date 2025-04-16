@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import AuthGuard from "@/components/auth/AuthGuard";
 import WelcomeTour from "@/components/onboarding/WelcomeTour";
 import RoleSelection from "@/components/onboarding/RoleSelection";
+import { Button } from "@/components/ui/button";
 
 const Onboarding = () => {
   const navigate = useNavigate();
